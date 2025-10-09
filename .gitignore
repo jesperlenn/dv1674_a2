@@ -3,8 +3,6 @@ blur
 bin/
 obj/
 
-pearson/data_o/
-
 # Object files
 *.o
 
