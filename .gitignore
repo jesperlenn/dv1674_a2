@@ -1,6 +1,9 @@
 # Binaries
 blur
-pearson
+bin/
+obj/
+
+pearson/data_o/
 
 # Object files
 *.o
