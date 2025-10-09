@@ -1,9 +1,12 @@
 # Binaries
 blur
 bin/
-obj/
 
 # Object files
 *.o
+obj/
+
+# Other
+data_o/
 
 .DS_Store
