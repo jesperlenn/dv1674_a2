@@ -1,0 +1,8 @@
+# Binaries
+blur
+pearson
+
+# Object files
+*.o
+
+.DS_Store
