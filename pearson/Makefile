@@ -1,7 +1,7 @@
 # Author: David Holmqvist <daae19@student.bth.se>
 
 CXX=g++
-CXXFLAGS=-std=c++17 -g -Wunused -Wall -Wunused -pthread
+CXXFLAGS=-std=c++17 -g -Wunused -Wall -Wunused -pthread -O3
 
 DOBJ=obj
 DBIN=bin
