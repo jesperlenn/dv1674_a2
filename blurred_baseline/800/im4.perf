@@ -1,0 +1,18 @@
+
+ Performance counter stats for './blur 800 data/im4.ppm data_o/im4_blurred.ppm':
+
+        647,348.12 msec task-clock:u                     #    1.000 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+            41,266      page-faults:u                    #   63.746 /sec                      
+ 4,124,862,500,564      instructions:u                   #    1.88  insn per cycle            
+ 2,193,506,809,434      cycles:u                         #    3.388 GHz                       
+   396,710,855,654      branches:u                       #  612.825 M/sec                     
+       107,272,896      branch-misses:u                  #    0.03% of all branches           
+
+     647.571722106 seconds time elapsed
+
+     645.618177000 seconds user
+       0.157159000 seconds sys
+
+

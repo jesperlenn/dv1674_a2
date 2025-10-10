@@ -1,0 +1,18 @@
+
+ Performance counter stats for './blur 100 data/im4.ppm data_o/im4_blurred.ppm':
+
+         82,289.41 msec task-clock:u                     #    0.999 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+            41,266      page-faults:u                    #  501.474 /sec                      
+   569,545,128,043      instructions:u                   #    2.05  insn per cycle            
+   278,447,205,103      cycles:u                         #    3.384 GHz                       
+    54,015,713,502      branches:u                       #  656.412 M/sec                     
+        48,444,661      branch-misses:u                  #    0.09% of all branches           
+
+      82.336116807 seconds time elapsed
+
+      81.967867000 seconds user
+       0.120503000 seconds sys
+
+

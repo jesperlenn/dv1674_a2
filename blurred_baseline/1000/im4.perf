@@ -1,0 +1,19 @@
+./blur: Segmentation fault
+
+ Performance counter stats for './blur 1000 data/im4.ppm data_o/im4_blurred.ppm':
+
+          1,441.44 msec task-clock:u                     #    0.816 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+            34,669      page-faults:u                    #   24.052 K/sec                     
+     6,742,032,540      instructions:u                   #    1.54  insn per cycle            
+     4,384,110,521      cycles:u                         #    3.041 GHz                       
+     1,036,104,622      branches:u                       #  718.798 M/sec                     
+           148,471      branch-misses:u                  #    0.01% of all branches           
+
+       1.766996616 seconds time elapsed
+
+       1.294822000 seconds user
+       0.148856000 seconds sys
+
+

@@ -1,0 +1,18 @@
+
+ Performance counter stats for './blur 100 data/im3.ppm data_o/im3_blurred.ppm':
+
+         17,333.96 msec task-clock:u                     #    1.000 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+            10,425      page-faults:u                    #  601.421 /sec                      
+   120,031,967,371      instructions:u                   #    2.05  insn per cycle            
+    58,653,613,156      cycles:u                         #    3.384 GHz                       
+    11,431,692,124      branches:u                       #  659.497 M/sec                     
+        10,769,723      branch-misses:u                  #    0.09% of all branches           
+
+      17.338992903 seconds time elapsed
+
+      17.264379000 seconds user
+       0.028821000 seconds sys
+
+
