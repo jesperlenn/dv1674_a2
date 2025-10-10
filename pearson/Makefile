@@ -8,10 +8,17 @@ DBIN=bin
 DSRC=src
 DINC=inc
 
-all: pearson verify
+BIN=pearson
 
-pearson: vector dataset analysis ${DSRC}/pearson.cpp ${DBIN}
-	$(CXX) $(CXXFLAGS) ${DSRC}/pearson.cpp ${DOBJ}/vector.o ${DOBJ}/dataset.o ${DOBJ}/analysis.o -o ${DBIN}/pearson
+ifeq ($(MULT), 1)
+	override CXXFLAGS += -DMULTI
+	override BIN = pearson_par
+endif
+
+all: ${BIN} verify
+
+${BIN}: vector dataset analysis ${DSRC}/pearson.cpp ${DBIN}
+	$(CXX) $(CXXFLAGS) ${DSRC}/pearson.cpp ${DOBJ}/vector.o ${DOBJ}/dataset.o ${DOBJ}/analysis.o -o ${DBIN}/${BIN}
 
 analysis: vector ${DINC}/analysis.hpp ${DSRC}/analysis.cpp
 	$(CXX) $(CXXFLAGS) -c ${DSRC}/analysis.cpp -o ${DOBJ}/analysis.o

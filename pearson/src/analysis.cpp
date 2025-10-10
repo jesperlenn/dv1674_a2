@@ -4,14 +4,21 @@ Author: David Holmqvist <daae19@student.bth.se>
 
 #include "../inc/analysis.hpp"
 #include <algorithm>
-#include <iostream>
 #include <pthread.h>
 #include <vector>
+
+#ifdef MULTI
+
+#include <iostream>
+
+#endif // MULTI
 
 namespace Analysis
 {
 
 pthread_mutex_t pair_mutex;
+
+#ifdef MULTI
 
 std::vector<double>
 correlation_coefficients (std::vector<Vector> datasets, unsigned thread_count)
@@ -85,6 +92,29 @@ worker_thread (void *args)
 
   return nullptr;
 }
+
+#endif // MULTI
+
+#ifndef MULTI
+
+std::vector<double>
+correlation_coefficients (std::vector<Vector> datasets)
+{
+  std::vector<double> result{};
+
+  for (auto sample1{ 0 }; sample1 < datasets.size () - 1; sample1++)
+    {
+      for (auto sample2{ sample1 + 1 }; sample2 < datasets.size (); sample2++)
+        {
+          auto corr{ pearson (datasets[sample1], datasets[sample2]) };
+          result.push_back (corr);
+        }
+    }
+
+  return result;
+}
+
+#endif // !MULTI
 
 double
 pearson (Vector vec1, Vector vec2)
