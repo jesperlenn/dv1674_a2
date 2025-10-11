@@ -3,9 +3,10 @@ Author: David Holmqvist <daae19@student.bth.se>
 */
 
 #include "../inc/vector.hpp"
+#include <cfloat>
 #include <cmath>
 
-Vector::Vector () : size{ 0 }, data{ nullptr } {}
+Vector::Vector () : cached_magnitude (DBL_MAX), cached_mean (DBL_MAX), size{ 0 }, data{ nullptr } {}
 
 Vector::~Vector ()
 {
@@ -16,12 +17,24 @@ Vector::~Vector ()
 
   size = 0;
 }
+Vector::Vector (unsigned size)
+    : size{ size }, data{ new double[size] }, cached_mean (DBL_MAX), cached_magnitude (DBL_MAX)
+{
+}
 
-Vector::Vector (unsigned size) : size{ size }, data{ new double[size] } {}
+Vector::Vector (unsigned size, double cached_mean, double cached_mangitude)
+    : size{ size }, data{ new double[size] }, cached_mean (cached_mean),
+      cached_magnitude (cached_mangitude)
+{
+}
 
-Vector::Vector (unsigned size, double *data) : size{ size }, data{ data } {}
+Vector::Vector (unsigned size, double *data, double cached_mean, double cached_mangitude)
+    : size{ size }, data{ data }, cached_mean (cached_mean), cached_magnitude (cached_mangitude)
+{
+}
 
-Vector::Vector (const Vector &other) : Vector{ other.size }
+Vector::Vector (const Vector &other)
+    : Vector{ other.size, other.cached_mean, other.cached_magnitude }
 {
   for (int i{ 0 }; i < size; i++)
     {
@@ -54,27 +67,37 @@ Vector::operator[] (unsigned i)
 }
 
 double
-Vector::mean () const
+Vector::mean ()
 {
-  double sum{ 0 };
-
-  for (int i{ 0 }; i < size; i++)
+  if (this->cached_mean == DBL_MAX)
     {
-      sum += data[i];
+      double sum{ 0 };
+
+      for (int i{ 0 }; i < size; i++)
+        {
+          sum += data[i];
+        }
+
+      this->cached_mean = sum / static_cast<double> (size);
     }
 
-  return sum / static_cast<double> (size);
+  return this->cached_mean;
 }
 
 double
-Vector::magnitude () const
+Vector::magnitude ()
 {
-  double dot_prod{ dot (*this) };
-  return std::sqrt (dot_prod);
+  if (this->cached_magnitude == DBL_MAX)
+    {
+      double dot_prod{ dot (*this) };
+      this->cached_magnitude = std::sqrt (dot_prod);
+    }
+
+  return this->cached_magnitude;
 }
 
 Vector
-Vector::operator/ (double div)
+Vector::operator/ (const double &div)
 {
   Vector result{ *this };
 
@@ -87,7 +110,7 @@ Vector::operator/ (double div)
 }
 
 Vector
-Vector::operator- (double sub)
+Vector::operator- (const double &sub)
 {
   Vector result{ *this };
 
@@ -100,7 +123,7 @@ Vector::operator- (double sub)
 }
 
 double
-Vector::dot (Vector rhs) const
+Vector::dot (const Vector &rhs) const
 {
   double result{ 0 };
 

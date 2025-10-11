@@ -8,26 +8,29 @@ Author: David Holmqvist <daae19@student.bth.se>
 class Vector
 {
 private:
+  double cached_mean;
+  double cached_magnitude;
   unsigned size;
   double *data;
 
 public:
   Vector ();
   Vector (unsigned size);
-  Vector (unsigned size, double *data);
+  Vector (unsigned size, double cached_mean, double cached_mangitude);
+  Vector (unsigned size, double *data, double cached_mean, double cached_mangitude);
   Vector (const Vector &other);
   ~Vector ();
 
-  double magnitude () const;
-  double mean () const;
+  double magnitude ();
+  double mean ();
   double normalize () const;
-  double dot (Vector rhs) const;
+  double dot (const Vector &rhs) const;
 
   unsigned get_size () const;
   double *get_data ();
 
-  Vector operator/ (double div);
-  Vector operator- (double sub);
+  Vector operator/ (const double &div);
+  Vector operator- (const double &sub);
   double operator[] (unsigned i) const;
   double &operator[] (unsigned i);
 };
