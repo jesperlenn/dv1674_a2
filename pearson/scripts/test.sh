@@ -34,3 +34,5 @@ for f in "${FILES[@]}"; do
   valgrind -q --tool=massif --massif-out-file=${RDIR}/${1}/massif/massif.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
   echo "done."
 done
+
+notify-send "Tests done."
