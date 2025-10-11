@@ -64,54 +64,27 @@ pearson (Vector vec1, Vector vec2, unsigned x, unsigned y)
       x_mean = vec1.mean ();
       mean_cache[x] = x_mean;
     }
-  else
-    {
-      if (x_mean != vec1.mean ())
-        {
-          std::cerr << "non matching\n";
-        }
-    }
 
   if (y_mean == DBL_MAX)
     {
       y_mean = vec2.mean ();
       mean_cache[y] = y_mean;
     }
-  else
-    {
-      if (y_mean != vec2.mean ())
-        {
-          std::cerr << "non matching\n";
-        }
-    }
+
+  auto x_mm{ vec1 - x_mean };
+  auto y_mm{ vec2 - y_mean };
 
   if (x_mag == DBL_MAX)
     {
-      x_mag = vec1.magnitude ();
+      x_mag = x_mm.magnitude ();
       magnitude_cache[x] = x_mag;
-    }
-  else
-    {
-      if (x_mag != vec1.magnitude ())
-        {
-          std::cerr << "non matching\n";
-        }
     }
 
   if (y_mag == DBL_MAX)
     {
-      y_mag = vec2.magnitude ();
+      y_mag = y_mm.magnitude ();
       magnitude_cache[y] = y_mag;
     }
-  else
-    {
-      if (x_mag != vec2.magnitude ())
-        {
-          std::cerr << "non matching\n";
-        }
-    }
-  auto x_mm{ vec1 - x_mean };
-  auto y_mm{ vec2 - y_mean };
 
   auto x_mm_over_x_mag{ x_mm / x_mag };
   auto y_mm_over_y_mag{ y_mm / y_mag };
