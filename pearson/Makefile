@@ -4,7 +4,7 @@ CXX=g++
 CXXFLAGS=-std=c++17 -g -Wunused -Wall -Wunused -pthread
 
 DOBJ=obj
-DBIN=bin
+DBIN=.
 DSRC=src
 DINC=inc
 
@@ -39,4 +39,4 @@ ${DOBJ}:
 	mkdir -p ${DOBJ}
 
 clean:
-	rm -rf ${DBIN} ${DOBJ} *.dSYM 2> /dev/null
+	rm -rf ${DBIN}/pearson_par ${DOBJ} *.dSYM 2> /dev/null
