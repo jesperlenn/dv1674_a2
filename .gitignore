@@ -1,5 +1,7 @@
 # Binaries
 blur
+pearson/pearson
+pearson/verify
 
 # Object files
 *.o
