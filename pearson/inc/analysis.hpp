@@ -11,8 +11,6 @@ Author: David Holmqvist <daae19@student.bth.se>
 namespace Analysis
 {
 
-#ifdef MULTI
-
 typedef struct
 {
   int index;
@@ -22,21 +20,14 @@ typedef struct
 
 typedef struct
 {
-  std::vector<pair> *data;
+  unsigned size;
+  unsigned done;
+  pair *data;
   std::vector<double> *result;
 } worker_args;
 
 void *worker_thread (void *args);
-std::vector<double> correlation_coefficients (std::vector<Vector> datasets, unsigned thread_count);
-
-#endif // MULTI
-
-#ifndef MULTI
-
-std::vector<double> correlation_coefficients (std::vector<Vector> datasets);
-
-#endif // !MULTI
-
+std::vector<double> correlation_coefficients (std::vector<Vector> &datasets, unsigned thread_count);
 double pearson (Vector vec1, Vector vec2);
 };
 
