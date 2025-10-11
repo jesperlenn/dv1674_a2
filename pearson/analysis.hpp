@@ -11,7 +11,6 @@ Author: David Holmqvist <daae19@student.bth.se>
 namespace Analysis
 {
 std::vector<double> correlation_coefficients (std::vector<Vector> datasets);
-double pearson (Vector vec1, Vector vec2, unsigned x, unsigned y);
 };
 
 #endif
