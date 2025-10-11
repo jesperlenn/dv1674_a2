@@ -23,12 +23,13 @@ typedef struct
   unsigned size;
   unsigned done;
   pair *data;
-  std::vector<double> *result;
+  std::vector<double> &result;
+  int thread_id;
 } worker_args;
 
 void *worker_thread (void *args);
 std::vector<double> correlation_coefficients (std::vector<Vector> &datasets, unsigned thread_count);
-double pearson (Vector vec1, Vector vec2);
+double pearson (Vector *vec1, Vector *vec2);
 };
 
 #endif

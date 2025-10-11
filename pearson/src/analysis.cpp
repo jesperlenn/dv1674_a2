@@ -11,45 +11,52 @@ Author: David Holmqvist <daae19@student.bth.se>
 namespace Analysis
 {
 
-pthread_mutex_t pair_mutex;
-
 std::vector<double>
 correlation_coefficients (std::vector<Vector> &datasets, unsigned thread_count)
 {
-  std::vector<double> result{};
   pthread_t threads[thread_count];
-  worker_args args;
+  worker_args *args;
   unsigned v_size = datasets.size ();
-  pair work_pairs[v_size + 1];
   unsigned size = v_size * (v_size - 1) / 2;
-
-  pthread_mutex_init (&pair_mutex, nullptr);
+  unsigned per_size = size / thread_count;
+  pair *work_pairs[thread_count];
+  std::vector<double> result;
 
   result.reserve (size);
 
-  for (int i = 0; i < size; i++)
-    result.push_back (0);
+  for (int i = 0; i < thread_count; i++)
+    {
+      work_pairs[i] = new pair[per_size];
+    }
 
-  args = worker_args{ v_size + 1, 0, work_pairs, &result };
   int counter = 0;
+  int t_counter = 0;
 
   for (int sample1{ 0 }; sample1 < v_size - 1; sample1++)
     {
       for (int sample2{ sample1 + 1 }; sample2 < v_size; sample2++)
         {
-          work_pairs[counter] = pair{ counter, &datasets[sample1], &datasets[sample2] };
+          int index = counter + t_counter * per_size;
+          result.push_back (0);
+          work_pairs[t_counter][counter] = { index, &datasets[sample1], &datasets[sample2] };
+
           counter++;
+
+          if (counter >= per_size)
+            {
+              t_counter++;
+              counter = 0;
+            }
         }
     }
 
-  work_pairs[counter] = pair{ -1, nullptr, nullptr };
-
   for (int i = 0; i < thread_count; i++)
     {
-      if (pthread_create (&threads[i], nullptr, worker_thread, (void *)&args) == -1)
+      args = new worker_args{ per_size, 0, work_pairs[i], result, i };
+      if (pthread_create (&threads[i], nullptr, worker_thread, (void *)args) == -1)
         {
           std::cerr << "Could not create threads\n";
-          return result;
+          return std::vector<double> ();
         }
     }
 
@@ -58,7 +65,6 @@ correlation_coefficients (std::vector<Vector> &datasets, unsigned thread_count)
       pthread_join (threads[i], nullptr);
     }
 
-  pthread_mutex_destroy (&pair_mutex);
   return result;
 }
 
@@ -67,35 +73,28 @@ worker_thread (void *_args)
 {
   worker_args *args = (worker_args *)_args;
   pair *data = args->data;
-  std::vector<double> *result = args->result;
   pair work_pair;
+  double result;
 
-  while (true)
+  while (args->size > args->done)
     {
-      pthread_mutex_lock (&pair_mutex);
       work_pair = data[args->done];
-      if (work_pair.index == -1)
-        {
-          pthread_mutex_unlock (&pair_mutex);
-          break;
-        }
       args->done++;
-      pthread_mutex_unlock (&pair_mutex);
-
-      (*result)[work_pair.index] = pearson (*work_pair.sample1, *work_pair.sample2);
+      result = pearson (work_pair.sample1, work_pair.sample2);
+      args->result[work_pair.index] = result;
     }
 
   return nullptr;
 }
 
 double
-pearson (Vector vec1, Vector vec2)
+pearson (Vector *vec1, Vector *vec2)
 {
-  double x_mean{ vec1.mean () };
-  double y_mean{ vec2.mean () };
+  double x_mean{ vec1->mean () };
+  double y_mean{ vec2->mean () };
 
-  Vector x_mm{ vec1 - x_mean };
-  Vector y_mm{ vec2 - y_mean };
+  Vector x_mm{ *vec1 - x_mean };
+  Vector y_mm{ *vec2 - y_mean };
 
   double x_mag{ x_mm.magnitude () };
   double y_mag{ y_mm.magnitude () };
