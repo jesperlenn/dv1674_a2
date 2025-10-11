@@ -7,5 +7,10 @@ pearson/data_o/
 
 # Object files
 *.o
+obj/
+
+# Other
+data_o/
+callgrind*
 
 .DS_Store
