@@ -3,12 +3,16 @@ DDIR=../data
 ODIR=../data_o
 RDIR=../result
 BIN=../pearson
+VBIN=../verify
 
 if [ $# != 1 ]; then
-  echo "./test.sh [result test name]"
-  exit 1
+  echo "Verifying"
+  for f in "${FILES[@]}"; do
+    ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
+    ./${VBIN} ${ODIR}/${f}_ref.data ${ODIR}/${f}_seq.data
+  done
+  exit 0
 fi
-
 mkdir -p ${RDIR}/${1}
 mkdir -p ${RDIR}/${1}/callgrind
 mkdir -p ${RDIR}/${1}/massif
