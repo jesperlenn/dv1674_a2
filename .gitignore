@@ -1,16 +1,16 @@
 # Binaries
 blur
-bin/
 obj/
-
-pearson/data_o/
+pearson/pearson_par
+pearson/verify
 
 # Object files
 *.o
 obj/
 
 # Other
-data_o/
+pearson/data_o/
+pearson/data/
 callgrind*
 
 .DS_Store
