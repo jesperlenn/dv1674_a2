@@ -1,0 +1,97 @@
+
+# started on Mon Oct 13 14:54:48 2025
+
+
+ Performance counter stats for './../pearson ../data/128.data ../data_o/128_seq.data' (10 runs):
+
+             16.14 msec task-clock:u                     #    0.982 CPUs utilized               ( +-  0.52% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+               232      page-faults:u                    #   14.376 K/sec                       ( +-  0.08% )
+         118840259      instructions:u                   #    2.37  insn per cycle              ( +-  0.59% )  (87.52%)
+          50241526      cycles:u                         #    3.113 GHz                         ( +-  0.19% )  (87.60%)
+          23068922      branches:u                       #    1.429 G/sec                       ( +-  0.46% )  (87.58%)
+            102544      branch-misses:u                  #    0.44% of all branches             ( +-  1.45% )  (77.13%)
+                        TopdownL1                 #     31.7 %  tma_backend_bound      
+                                                  #      8.7 %  tma_bad_speculation    
+                                                  #     16.4 %  tma_frontend_bound     
+                                                  #     43.2 %  tma_retiring             ( +-  0.22% )  (89.57%)
+          28956900      L1-dcache-loads:u                #    1.794 G/sec                       ( +-  0.04% )  (93.78%)
+            168819      L1-dcache-load-misses:u          #    0.58% of all L1-dcache accesses   ( +-  0.84% )  (93.85%)
+              2992      LLC-loads:u                      #  185.395 K/sec                       ( +-  0.88% )  (93.78%)
+                82      LLC-load-misses:u                #    2.74% of all LL-cache accesses    ( +- 41.98% )  (78.72%)
+
+         0.0164367 +- 0.0000878 seconds time elapsed  ( +-  0.53% )
+
+# started on Mon Oct 13 14:54:49 2025
+
+
+ Performance counter stats for './../pearson ../data/256.data ../data_o/256_seq.data' (10 runs):
+
+             93.88 msec task-clock:u                     #    0.996 CPUs utilized               ( +-  0.47% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+               587      page-faults:u                    #    6.253 K/sec                       ( +-  0.04% )
+         769336317      instructions:u                   #    2.24  insn per cycle              ( +-  0.16% )  (90.47%)
+         343572781      cycles:u                         #    3.660 GHz                         ( +-  0.31% )  (90.47%)
+         143799783      branches:u                       #    1.532 G/sec                       ( +-  0.07% )  (90.46%)
+            571057      branch-misses:u                  #    0.40% of all branches             ( +-  9.52% )  (80.93%)
+                        TopdownL1                 #     35.8 %  tma_backend_bound      
+                                                  #     27.0 %  tma_bad_speculation    
+                                                  #      3.9 %  tma_frontend_bound     
+                                                  #     33.2 %  tma_retiring             ( +-  0.44% )  (90.46%)
+         178174251      L1-dcache-loads:u                #    1.898 G/sec                       ( +-  0.14% )  (91.51%)
+           1158621      L1-dcache-load-misses:u          #    0.65% of all L1-dcache accesses   ( +-  0.18% )  (91.51%)
+              7492      LLC-loads:u                      #   79.806 K/sec                       ( +-  3.75% )  (91.51%)
+              1650      LLC-load-misses:u                #   22.02% of all LL-cache accesses    ( +- 12.04% )  (81.98%)
+
+          0.094230 +- 0.000436 seconds time elapsed  ( +-  0.46% )
+
+# started on Mon Oct 13 14:54:50 2025
+
+
+ Performance counter stats for './../pearson ../data/512.data ../data_o/512_seq.data' (10 runs):
+
+            622.20 msec task-clock:u                     #    0.998 CPUs utilized               ( +-  1.71% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+              1936      page-faults:u                    #    3.112 K/sec                       ( +-  0.01% )
+        4590992706      instructions:u                   #    1.87  insn per cycle              ( +-  0.03% )  (90.78%)
+        2451209854      cycles:u                         #    3.940 GHz                         ( +-  2.05% )  (90.78%)
+         826763898      branches:u                       #    1.329 G/sec                       ( +-  0.02% )  (90.95%)
+           3219395      branch-misses:u                  #    0.39% of all branches             ( +-  0.48% )  (81.90%)
+                        TopdownL1                 #     24.8 %  tma_backend_bound      
+                                                  #     50.8 %  tma_bad_speculation    
+                                                  #      2.4 %  tma_frontend_bound     
+                                                  #     22.0 %  tma_retiring             ( +-  2.06% )  (90.95%)
+        1044123477      L1-dcache-loads:u                #    1.678 G/sec                       ( +-  0.04% )  (90.95%)
+          12754838      L1-dcache-load-misses:u          #    1.22% of all L1-dcache accesses   ( +-  1.11% )  (90.95%)
+            978647      LLC-loads:u                      #    1.573 M/sec                       ( +-  2.15% )  (90.95%)
+             20239      LLC-load-misses:u                #    2.07% of all LL-cache accesses    ( +-  3.76% )  (81.63%)
+
+            0.6234 +- 0.0114 seconds time elapsed  ( +-  1.83% )
+
+# started on Mon Oct 13 14:54:56 2025
+
+
+ Performance counter stats for './../pearson ../data/1024.data ../data_o/1024_seq.data' (10 runs):
+
+           4318.75 msec task-clock:u                     #    1.000 CPUs utilized               ( +-  1.26% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+              5638      page-faults:u                    #    1.305 K/sec                       ( +-  1.38% )
+       31104833034      instructions:u                   #    1.71  insn per cycle              ( +-  0.01% )  (90.90%)
+       18179956319      cycles:u                         #    4.210 GHz                         ( +-  1.30% )  (90.90%)
+        5416072650      branches:u                       #    1.254 G/sec                       ( +-  0.00% )  (90.90%)
+          12868417      branch-misses:u                  #    0.24% of all branches             ( +-  0.53% )  (81.81%)
+                        TopdownL1                 #      8.9 %  tma_backend_bound      
+                                                  #     69.5 %  tma_bad_speculation    
+                                                  #      0.8 %  tma_frontend_bound     
+                                                  #     20.7 %  tma_retiring             ( +-  1.30% )  (90.91%)
+        6974692312      L1-dcache-loads:u                #    1.615 G/sec                       ( +-  0.01% )  (90.92%)
+         550079735      L1-dcache-load-misses:u          #    7.89% of all L1-dcache accesses   ( +-  0.24% )  (90.92%)
+           8344427      LLC-loads:u                      #    1.932 M/sec                       ( +-  2.39% )  (90.92%)
+            132098      LLC-load-misses:u                #    1.58% of all LL-cache accesses    ( +-  5.68% )  (81.80%)
+
+            4.3200 +- 0.0545 seconds time elapsed  ( +-  1.26% )
+
