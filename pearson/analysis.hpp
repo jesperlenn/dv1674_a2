@@ -10,7 +10,24 @@ Author: David Holmqvist <daae19@student.bth.se>
 
 namespace Analysis
 {
-std::vector<double> correlation_coefficients (std::vector<Vector> datasets);
+
+typedef struct
+{
+  unsigned index;
+  Vector *vec_1;
+  Vector *vec_2;
+} Pair;
+
+typedef struct
+{
+  unsigned segment_size;
+  double *result;
+  Pair *pairs;
+} Argument;
+
+std::vector<double> correlation_coefficients (std::vector<Vector> datasets,
+                                              unsigned threads);
+void *worker_thread (void *args);
 };
 
 #endif

@@ -2,41 +2,36 @@ FILES=(128 256 512 1024)
 DDIR=../data
 ODIR=../data_o
 RDIR=../result
-BIN=../pearson
+BIN=../pearson_par
 VBIN=../verify
+THREADS=(1 2 4 8 16 32 64)
 
-if [ $# != 1 ]; then
-  echo "Verifying"
+for t in "${THREADS[@]}"; do
+  mkdir -p ${RDIR}/${1}/${t}
+  mkdir -p ${RDIR}/${1}/${t}/callgrind
+  mkdir -p ${RDIR}/${1}/${t}/massif
+
+  echo "" >${RDIR}/${1}/${t}/perf.data
+
   for f in "${FILES[@]}"; do
-    ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-    ./${VBIN} ${ODIR}/${f}_ref.data ${ODIR}/${f}_seq.data
+    echo -n "running perf stat with ${t} threads ${f} ... "
+    perf stat -o ${RDIR}/${1}/${t}/perf.data --append -d --repeat 10 ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data ${t}
+    echo "done."
   done
-  exit 0
-fi
-mkdir -p ${RDIR}/${1}
-mkdir -p ${RDIR}/${1}/callgrind
-mkdir -p ${RDIR}/${1}/massif
 
-echo "" >${RDIR}/${1}/perf.data
+  rm -f ${RDIR}/${1}/${t}/callgrind/*
+  for f in "${FILES[@]}"; do
+    echo -n "Running callgrind with ${t} threads ${f} ... "
+    valgrind -q --tool=callgrind --separate-threads=yes --callgrind-out-file=${RDIR}/${1}/${t}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data ${t}
+    echo "done."
+  done
 
-for f in "${FILES[@]}"; do
-  echo -n "running perf stat ${f} ... "
-  perf stat -o ${RDIR}/${1}/perf.data --append -d --repeat 10 ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-  echo "done."
-done
-
-rm -f ${RDIR}/${1}/callgrind/*
-for f in "${FILES[@]}"; do
-  echo -n "Running callgrind ${f} ... "
-  valgrind -q --tool=callgrind --callgrind-out-file=${RDIR}/${1}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-  echo "done."
-done
-
-rm -f ${RDIR}/${1}/massif/*
-for f in "${FILES[@]}"; do
-  echo -n "Running massif ${f} ... "
-  valgrind -q --tool=massif --massif-out-file=${RDIR}/${1}/massif/massif.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-  echo "done."
+  rm -f ${RDIR}/${1}/${t}/massif/*
+  for f in "${FILES[@]}"; do
+    echo -n "Running massif with ${t} threads ${f} ... "
+    valgrind -q --tool=massif --massif-out-file=${RDIR}/${1}/${t}/massif/massif.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data ${t}
+    echo "done."
+  done
 done
 
 notify-send "Tests done."

@@ -1,12 +1,12 @@
 # Author: David Holmqvist <daae19@student.bth.se>
 
 CXX=g++
-CXXFLAGS=-std=c++17 -g -Wunused -Wall -Wunused -O3
+CXXFLAGS=-std=c++17 -g -Wunused -Wall -Wunused -O3 -pthread
 
-all: pearson verify
+all: pearson_par verify
 
-pearson: vector dataset analysis pearson.cpp 
-	$(CXX) $(CXXFLAGS) pearson.cpp vector.o dataset.o analysis.o -o pearson
+pearson_par: vector dataset analysis pearson.cpp 
+	$(CXX) $(CXXFLAGS) pearson.cpp vector.o dataset.o analysis.o -o pearson_par
 
 analysis: vector analysis.hpp analysis.cpp
 	$(CXX) $(CXXFLAGS) -c analysis.cpp -o analysis.o

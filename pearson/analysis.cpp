@@ -10,33 +10,93 @@ Author: David Holmqvist <daae19@student.bth.se>
 #include <iostream>
 #include <iterator>
 #include <list>
+#include <pthread.h>
 #include <vector>
 
 namespace Analysis
 {
 std::vector<double>
-correlation_coefficients (std::vector<Vector> datasets)
+correlation_coefficients (std::vector<Vector> datasets, unsigned threads)
 {
-  std::vector<double> result{};
   Vector temp;
-  unsigned size;
-  Vector vec1, vec2;
+  unsigned size, segment_size, result_size;
+  unsigned i, j, index, counter, t_counter;
+  pthread_t *workers;
+  Pair *segment;
+  double *results;
 
   size = datasets.size ();
-  for (int i = 0; i < size; i++)
+  result_size = size * (size - 1) / 2;
+  segment_size = result_size / threads;
+  results = new double[result_size];
+  workers = new pthread_t[threads];
+  segment = new Pair[segment_size];
+  Argument *arg;
+
+  for (i = 0; i < size; i++)
     {
       datasets[i].prepeare ();
     }
 
-  for (auto sample1{ 0 }; sample1 < size - 1; sample1++)
+  index = 0;
+  t_counter = 0;
+  counter = 0;
+
+  for (i = 0; i < size - 1; i++)
     {
-      for (auto sample2{ sample1 + 1 }; sample2 < size; sample2++)
+      for (j = i + 1; j < size; j++)
         {
-          auto r{ datasets[sample1].dot (datasets[sample2]) };
-          result.push_back (std::max (std::min (r, 1.0), -1.0));
+          segment[counter] = Pair{ index, &datasets[i], &datasets[j] };
+
+          counter++;
+          index++;
+
+          if (counter >= segment_size)
+            {
+              arg = new Argument{ segment_size, results, segment };
+              if (pthread_create (&workers[t_counter], nullptr, worker_thread,
+                                  (void *)arg)
+                  == -1)
+                {
+                  std::cerr << "Could not create thread\n";
+                  return std::vector<double> ();
+                }
+              segment = new Pair[segment_size];
+              counter = 0;
+              t_counter++;
+            }
         }
     }
 
-  return result;
+  for (i = 0; i < threads; i++)
+    {
+      pthread_join (workers[i], nullptr);
+    }
+
+  return std::vector<double> (results, results + result_size);
+}
+
+void *
+worker_thread (void *args)
+{
+  Argument arg = *(Argument *)args;
+  Vector *vec_1, *vec_2;
+  double r, *results;
+  unsigned index;
+
+  results = arg.result;
+
+  for (int i = 0; i < arg.segment_size; i++)
+    {
+      vec_1 = arg.pairs[i].vec_1;
+      vec_2 = arg.pairs[i].vec_2;
+      index = arg.pairs[i].index;
+
+      r = vec_1->dot (*vec_2);
+      results[index] = std::max (std::min (r, 1.0), -1.0);
+    }
+
+  delete[] arg.pairs;
+  return nullptr;
 }
 }; // namespace Analysis
