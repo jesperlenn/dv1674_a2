@@ -35,6 +35,7 @@ read (std::string filename)
 
   std::getline (f, line); // ignore first newline
 
+  result.reserve (dimension);
   while (std::getline (f, line))
     {
       std::stringstream ss{ line };
@@ -63,8 +64,10 @@ write (std::vector<double> data, std::string filename)
   for (auto i{ 0 }; i < data.size (); i++)
     {
       f << std::setprecision (std::numeric_limits<double>::digits10 + 1)
-        << data[i] << std::endl;
+        << data[i] << "\n";
     }
+
+  f.close ();
 }
 
 };
