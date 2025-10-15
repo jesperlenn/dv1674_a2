@@ -27,75 +27,86 @@ namespace Filter
         Matrix scratch{PPM::max_dimension};
         auto dst{m};
 
-        for (auto x{0}; x < dst.get_x_size(); x++)
+        const int W = dst.get_x_size();
+        const int H = dst.get_y_size();
+
+        // Compute weights once
+        double w[Filter::Gauss::max_radius]{};
+        Gauss::get_weights(radius, w);
+
+        // -------- HORIZONTAL PASS (contiguous in memory) --------
+        for (int y = 0; y < H; ++y)
         {
-            for (auto y{0}; y < dst.get_y_size(); y++)
+            for (int x = 0; x < W; ++x)
             {
-                double w[Gauss::max_radius]{};
-                Gauss::get_weights(radius, w);
+                double r = w[0] * dst.r(x, y);
+                double g = w[0] * dst.g(x, y);
+                double b = w[0] * dst.b(x, y);
+                double n = w[0];
 
-                // unsigned char Matrix::r(unsigned x, unsigned y) const
-                // {
-                //     return R[y * x_size + x];
-                // }
-
-                auto r{w[0] * dst.r(x, y)}, g{w[0] * dst.g(x, y)}, b{w[0] * dst.b(x, y)}, n{w[0]};
-
-                for (auto wi{1}; wi <= radius; wi++)
+                for (int wi = 1; wi <= radius; ++wi)
                 {
-                    auto wc{w[wi]};
-                    auto x2{x - wi};
-                    if (x2 >= 0)
+                    const double wc = w[wi];
+
+                    int xL = x - wi;
+                    if (xL >= 0)
                     {
-                        r += wc * dst.r(x2, y);
-                        g += wc * dst.g(x2, y);
-                        b += wc * dst.b(x2, y);
+                        r += wc * dst.r(xL, y);
+                        g += wc * dst.g(xL, y);
+                        b += wc * dst.b(xL, y);
                         n += wc;
                     }
-                    x2 = x + wi;
-                    if (x2 < dst.get_x_size())
+
+                    int xR = x + wi;
+                    if (xR < W)
                     {
-                        r += wc * dst.r(x2, y);
-                        g += wc * dst.g(x2, y);
-                        b += wc * dst.b(x2, y);
+                        r += wc * dst.r(xR, y);
+                        g += wc * dst.g(xR, y);
+                        b += wc * dst.b(xR, y);
                         n += wc;
                     }
                 }
+
                 scratch.r(x, y) = r / n;
                 scratch.g(x, y) = g / n;
                 scratch.b(x, y) = b / n;
             }
         }
 
-        for (auto x{0}; x < dst.get_x_size(); x++)
+        // -------- VERTICAL PASS --------
+        // (vertical access is strided; still benefit from hoisted weights & locals)
+        for (int y = 0; y < H; ++y)
         {
-            for (auto y{0}; y < dst.get_y_size(); y++)
+            for (int x = 0; x < W; ++x)
             {
-                double w[Gauss::max_radius]{};
-                Gauss::get_weights(radius, w);
+                double r = w[0] * scratch.r(x, y);
+                double g = w[0] * scratch.g(x, y);
+                double b = w[0] * scratch.b(x, y);
+                double n = w[0];
 
-                auto r{w[0] * scratch.r(x, y)}, g{w[0] * scratch.g(x, y)}, b{w[0] * scratch.b(x, y)}, n{w[0]};
-
-                for (auto wi{1}; wi <= radius; wi++)
+                for (int wi = 1; wi <= radius; ++wi)
                 {
-                    auto wc{w[wi]};
-                    auto y2{y - wi};
-                    if (y2 >= 0)
+                    const double wc = w[wi];
+
+                    int yT = y - wi;
+                    if (yT >= 0)
                     {
-                        r += wc * scratch.r(x, y2);
-                        g += wc * scratch.g(x, y2);
-                        b += wc * scratch.b(x, y2);
+                        r += wc * scratch.r(x, yT);
+                        g += wc * scratch.g(x, yT);
+                        b += wc * scratch.b(x, yT);
                         n += wc;
                     }
-                    y2 = y + wi;
-                    if (y2 < dst.get_y_size())
+
+                    int yB = y + wi;
+                    if (yB < H)
                     {
-                        r += wc * scratch.r(x, y2);
-                        g += wc * scratch.g(x, y2);
-                        b += wc * scratch.b(x, y2);
+                        r += wc * scratch.r(x, yB);
+                        g += wc * scratch.g(x, yB);
+                        b += wc * scratch.b(x, yB);
                         n += wc;
                     }
                 }
+
                 dst.r(x, y) = r / n;
                 dst.g(x, y) = g / n;
                 dst.b(x, y) = b / n;
@@ -104,5 +115,4 @@ namespace Filter
 
         return dst;
     }
-
 }
