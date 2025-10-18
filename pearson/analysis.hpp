@@ -11,6 +11,7 @@ Author: David Holmqvist <daae19@student.bth.se>
 namespace Analysis
 {
 
+#ifdef PAR
 typedef struct
 {
   unsigned index;
@@ -33,6 +34,12 @@ typedef struct
 std::vector<double> correlation_coefficients (std::vector<Vector> datasets,
                                               unsigned threads);
 void *worker_thread (void *args);
+#endif // PAR
+
+#ifndef PAR
+std::vector<double> correlation_coefficients (std::vector<Vector> datasets);
+#endif // !PAR
+
 };
 
 #endif

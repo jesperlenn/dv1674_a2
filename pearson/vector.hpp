@@ -8,8 +8,8 @@ Author: David Holmqvist <daae19@student.bth.se>
 class alignas (double) Vector
 {
 private:
-  double *data;
   unsigned size;
+  double *data;
 
 public:
   Vector ();

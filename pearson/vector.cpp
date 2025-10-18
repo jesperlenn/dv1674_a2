@@ -23,7 +23,7 @@ Vector::Vector (unsigned size, double *data) : size{ size }, data{ data } {}
 
 Vector::Vector (const Vector &other) : Vector{ other.size }
 {
-  for (auto i{ 0 }; i < size; i += 4)
+  for (unsigned i = 0; i < size; i += 4)
     {
       data[i] = other.data[i];
       data[i + 1] = other.data[i + 1];
@@ -59,12 +59,12 @@ Vector::operator[] (unsigned i)
 double
 Vector::mean () const
 {
-  double sum1{ 0 };
-  double sum2{ 0 };
-  double sum3{ 0 };
-  double sum4{ 0 };
+  double sum1 = 0;
+  double sum2 = 0;
+  double sum3 = 0;
+  double sum4 = 0;
 
-  for (auto i{ 0 }; i < size; i += 4)
+  for (unsigned i = 0; i < size; i += 4)
     {
       sum1 += data[i];
       sum2 += data[i + 1];
@@ -85,7 +85,7 @@ Vector::magnitude () const
 void
 Vector::sub (const double &sub)
 {
-  for (auto i{ 0 }; i < size; i += 4)
+  for (unsigned i{ 0 }; i < size; i += 4)
     {
       data[i] -= sub;
       data[i + 1] -= sub;
@@ -97,7 +97,7 @@ Vector::sub (const double &sub)
 void
 Vector::div (const double &div)
 {
-  for (auto i{ 0 }; i < size; i += 4)
+  for (unsigned i = 0; i < size; i += 4)
     {
       data[i] /= div;
       data[i + 1] /= div;
@@ -118,12 +118,12 @@ Vector::prepeare ()
 double
 Vector::dot (const Vector &rhs) const
 {
-  double res1{ 0 };
-  double res2{ 0 };
-  double res3{ 0 };
-  double res4{ 0 };
+  double res1 = 0;
+  double res2 = 0;
+  double res3 = 0;
+  double res4 = 0;
 
-  for (auto i{ 0 }; i < size; i += 4)
+  for (unsigned i = 0; i < size; i += 4)
     {
       res1 += data[i] * rhs[i];
       res2 += data[i + 1] * rhs[i + 1];

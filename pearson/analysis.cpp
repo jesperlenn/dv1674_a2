@@ -4,12 +4,16 @@ Author: David Holmqvist <daae19@student.bth.se>
 
 #include "analysis.hpp"
 #include "vector.hpp"
-#include <pthread.h>
 #include <vector>
+
+#ifdef PAR
+#include <pthread.h>
+#endif // PAR
 
 namespace Analysis
 {
 
+#ifdef PAR
 pthread_barrier_t prep_barrier;
 
 std::vector<double>
@@ -17,7 +21,7 @@ correlation_coefficients (std::vector<Vector> datasets, unsigned threads)
 {
   Vector temp;
   unsigned size, segment_size, result_size, prep_size;
-  unsigned i, j, index, counter, t_counter;
+  unsigned i, j, index;
   std::vector<pthread_t> workers;
 
   std::vector<Pair> pairs;
@@ -89,7 +93,7 @@ worker_thread (void *args)
 
   pthread_barrier_wait (&prep_barrier);
 
-  for (int i = arg->pair_start; i < arg->pair_end; i++)
+  for (unsigned i = arg->pair_start; i < arg->pair_end; i++)
     {
       vec_1 = (*arg->pairs)[i].vec_1;
       vec_2 = (*arg->pairs)[i].vec_2;
@@ -102,4 +106,33 @@ worker_thread (void *args)
   delete arg;
   return nullptr;
 }
+#endif // PAR
+#ifndef PAR
+std::vector<double>
+correlation_coefficients (std::vector<Vector> datasets)
+{
+  std::vector<double> result{};
+  double r;
+  Vector temp;
+  unsigned size;
+  Vector vec1, vec2;
+
+  size = datasets.size ();
+  for (unsigned i = 0; i < size; i++)
+    {
+      datasets[i].prepeare ();
+    }
+
+  for (unsigned sample_1 = 0; sample_1 < size - 1; sample_1++)
+    {
+      for (unsigned sample_2 = sample_1 + 1; sample_2 < size; sample_2++)
+        {
+          r = datasets[sample_1].dot (datasets[sample_2]);
+          result.push_back (std::max (std::min (r, 1.0), -1.0));
+        }
+    }
+
+  return result;
+}
+#endif // !PAR
 }; // namespace Analysis

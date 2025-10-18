@@ -1,3 +1,5 @@
+#!/bin/bash
+
 FILES=(128 256 512 1024)
 DDIR=../data
 ODIR=../data_o

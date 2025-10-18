@@ -17,7 +17,7 @@ namespace Dataset
 std::vector<Vector>
 read (std::string filename)
 {
-  unsigned dimension{};
+  unsigned dimension;
   std::vector<Vector> result{};
   std::ifstream f{};
 
@@ -31,7 +31,7 @@ read (std::string filename)
     }
 
   f >> dimension;
-  std::string line{};
+  std::string line;
 
   std::getline (f, line); // ignore first newline
 
@@ -61,7 +61,7 @@ write (std::vector<double> data, std::string filename)
       return;
     }
 
-  for (auto i{ 0 }; i < data.size (); i++)
+  for (unsigned i = 0; i < data.size (); i++)
     {
       f << std::setprecision (std::numeric_limits<double>::digits10 + 1)
         << data[i] << "\n";
