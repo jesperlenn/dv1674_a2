@@ -5,11 +5,6 @@ Author: David Holmqvist <daae19@student.bth.se>
 #include "analysis.hpp"
 #include "vector.hpp"
 #include <algorithm>
-#include <cfloat>
-#include <cmath>
-#include <iostream>
-#include <iterator>
-#include <list>
 #include <vector>
 
 namespace Analysis

@@ -28,7 +28,7 @@ done
 rm -f ${RDIR}/${1}/callgrind/*
 for f in "${FILES[@]}"; do
   echo -n "Running callgrind ${f} ... "
-  valgrind -q --tool=callgrind --callgrind-out-file=${RDIR}/${1}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
+  valgrind -q --tool=callgrind --cache-sim=yes --branch-sim=yes --dump-instr=yes --callgrind-out-file=${RDIR}/${1}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
   echo "done."
 done
 
