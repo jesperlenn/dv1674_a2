@@ -1,8 +1,14 @@
 # Binaries
 blur
-pearson
+pearson/pearson
+pearson/pearson_par
+pearson/verify
 
 # Object files
 *.o
+
+# other
+pearson/data_o
+pearson/data_o/*
 
 .DS_Store

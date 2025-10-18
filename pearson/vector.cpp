@@ -3,114 +3,133 @@ Author: David Holmqvist <daae19@student.bth.se>
 */
 
 #include "vector.hpp"
-#include <iostream>
 #include <cmath>
-#include <vector>
 
-Vector::Vector()
-    : size{0}, data{nullptr}
-{
-}
+Vector::Vector () : size{ 0 }, data{ nullptr } {}
 
-Vector::~Vector()
+Vector::~Vector ()
 {
-    if (data)
+  if (data)
     {
-        delete[] data;
+      delete[] data;
     }
 
-    size = 0;
+  size = 0;
 }
 
-Vector::Vector(unsigned size)
-    : size{size}, data{new double[size]}
-{
-}
+Vector::Vector (unsigned size) : size{ size }, data{ new double[size] } {}
 
-Vector::Vector(unsigned size, double *data)
-    : size{size}, data{data}
-{
-}
+Vector::Vector (unsigned size, double *data) : size{ size }, data{ data } {}
 
-Vector::Vector(const Vector &other)
-    : Vector{other.size}
+Vector::Vector (const Vector &other) : Vector{ other.size }
 {
-    for (auto i{0}; i < size; i++)
+  for (unsigned i = 0; i < size; i += 4)
     {
-        data[i] = other.data[i];
+      data[i] = other.data[i];
+      data[i + 1] = other.data[i + 1];
+      data[i + 2] = other.data[i + 2];
+      data[i + 3] = other.data[i + 3];
     }
 }
 
-unsigned Vector::get_size() const
+unsigned
+Vector::get_size () const
 {
-    return size;
+  return size;
 }
 
-double *Vector::get_data()
+double *
+Vector::get_data ()
 {
-    return data;
+  return data;
 }
 
-double Vector::operator[](unsigned i) const
+double
+Vector::operator[] (unsigned i) const
 {
-    return data[i];
+  return data[i];
 }
 
-double &Vector::operator[](unsigned i)
+double &
+Vector::operator[] (unsigned i)
 {
-    return data[i];
+  return data[i];
 }
 
-double Vector::mean() const
+double
+Vector::mean () const
 {
-    double sum{0};
+  double sum1 = 0;
+  double sum2 = 0;
+  double sum3 = 0;
+  double sum4 = 0;
 
-    for (auto i{0}; i < size; i++)
+  for (unsigned i = 0; i < size; i += 4)
     {
-        sum += data[i];
+      sum1 += data[i];
+      sum2 += data[i + 1];
+      sum3 += data[i + 2];
+      sum4 += data[i + 3];
     }
 
-    return sum / static_cast<double>(size);
+  return (sum1 + sum2 + sum3 + sum4) / static_cast<double> (size);
 }
 
-double Vector::magnitude() const
+double
+Vector::magnitude () const
 {
-    auto dot_prod{dot(*this)};
-    return std::sqrt(dot_prod);
+  auto dot_prod{ dot (*this) };
+  return std::sqrt (dot_prod);
 }
 
-Vector Vector::operator/(double div)
+void
+Vector::sub (const double &sub)
 {
-    auto result{*this};
-
-    for (auto i{0}; i < size; i++)
+  for (unsigned i{ 0 }; i < size; i += 4)
     {
-        result[i] /= div;
+      data[i] -= sub;
+      data[i + 1] -= sub;
+      data[i + 2] -= sub;
+      data[i + 3] -= sub;
+    }
+}
+
+void
+Vector::div (const double &div)
+{
+  for (unsigned i = 0; i < size; i += 4)
+    {
+      data[i] /= div;
+      data[i + 1] /= div;
+      data[i + 2] /= div;
+      data[i + 3] /= div;
+    }
+}
+
+void
+Vector::prepeare ()
+{
+  double mean = this->mean ();
+  this->sub (mean);
+  double mag = this->magnitude ();
+  this->div (mag);
+}
+
+double
+Vector::dot (const Vector &rhs) const
+{
+  double res1 = 0;
+  double res2 = 0;
+  double res3 = 0;
+  double res4 = 0;
+
+  for (unsigned i = 0; i < size; i += 4)
+    {
+      res1 += data[i] * rhs[i];
+      res2 += data[i + 1] * rhs[i + 1];
+      res3 += data[i + 2] * rhs[i + 2];
+      res4 += data[i + 3] * rhs[i + 3];
     }
 
-    return result;
-}
-
-Vector Vector::operator-(double sub)
-{
-    auto result{*this};
-
-    for (auto i{0}; i < size; i++)
-    {
-        result[i] -= sub;
-    }
-
-    return result;
-}
-
-double Vector::dot(Vector rhs) const
-{
-    double result{0};
-
-    for (auto i{0}; i < size; i++)
-    {
-        result += data[i] * rhs[i];
-    }
-
-    return result;
+  return (res1 + res2 + res3 + res4);
 }

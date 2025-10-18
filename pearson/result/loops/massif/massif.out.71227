@@ -1,0 +1,1254 @@
+desc: --massif-out-file=../result/loops/massif/massif.out.%p
+cmd: ./../pearson ../data/512.data ../data_o/512_seq.data
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=5719172
+mem_heap_B=105001
+mem_heap_extra_B=111
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=11813150
+mem_heap_B=133865
+mem_heap_extra_B=167
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=21042349
+mem_heap_B=175081
+mem_heap_extra_B=247
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=27448056
+mem_heap_B=203753
+mem_heap_extra_B=303
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=32692687
+mem_heap_B=228841
+mem_heap_extra_B=351
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=40084904
+mem_heap_B=265705
+mem_heap_extra_B=423
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=49413111
+mem_heap_B=306665
+mem_heap_extra_B=503
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=55289899
+mem_heap_B=335337
+mem_heap_extra_B=559
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=65215844
+mem_heap_B=381417
+mem_heap_extra_B=647
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=73101436
+mem_heap_B=418281
+mem_heap_extra_B=719
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=83891050
+mem_heap_B=467433
+mem_heap_extra_B=815
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=89958228
+mem_heap_B=496162
+mem_heap_extra_B=886
+mem_stacks_B=0
+heap_tree=detailed
+n4: 496162 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 401408 0x4002D3A: Vector (vector.cpp:22)
+  n3: 401408 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 262144 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 262144 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 262144 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 262144 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 262144 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 262144 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 262144 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 262144 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 262144 0x40027DD: main (pearson.cpp:17)
+   n1: 135168 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 135168 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 135168 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 135168 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 135168 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 12834 in 7 places, all below massif's threshold (1.00%)
+ n1: 8192 0x49B449B: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B449B: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B8879: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x4003939: open (fstream:345)
+     n1: 8192 0x4003939: open (fstream:745)
+      n1: 8192 0x4003939: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40027DD: main (pearson.cpp:17)
+#-----------
+snapshot=13
+#-----------
+time=96702693
+mem_heap_B=528873
+mem_heap_extra_B=935
+mem_stacks_B=0
+heap_tree=detailed
+n4: 528873 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 434176 0x4002D3A: Vector (vector.cpp:22)
+  n3: 434176 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 262144 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 262144 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 262144 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 262144 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 262144 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 262144 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 262144 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 262144 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 262144 0x40027DD: main (pearson.cpp:17)
+   n1: 167936 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 167936 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 167936 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 167936 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 167936 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 12777 in 7 places, all below massif's threshold (1.00%)
+ n1: 8192 0x49B449B: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B449B: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B8879: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x4003939: open (fstream:345)
+     n1: 8192 0x4003939: open (fstream:745)
+      n1: 8192 0x4003939: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40027DD: main (pearson.cpp:17)
+#-----------
+snapshot=14
+#-----------
+time=107484156
+mem_heap_B=578025
+mem_heap_extra_B=1031
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=116677513
+mem_heap_B=1151465
+mem_heap_extra_B=2151
+mem_stacks_B=0
+heap_tree=detailed
+n3: 1151465 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1052672 0x4002D3A: Vector (vector.cpp:22)
+  n3: 1052672 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 786432 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 786432 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 786432 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 786432 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 786432 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 786432 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 786432 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 786432 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 786432 0x40027DD: main (pearson.cpp:17)
+   n1: 258048 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 258048 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 258048 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 258048 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 258048 0x40027DD: main (pearson.cpp:17)
+   n0: 8192 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 25065 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=16
+#-----------
+time=122061433
+mem_heap_B=649705
+mem_heap_extra_B=1167
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=130136392
+mem_heap_B=686626
+mem_heap_extra_B=1254
+mem_stacks_B=0
+heap_tree=detailed
+n4: 686626 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 589824 0x4002D3A: Vector (vector.cpp:22)
+  n3: 589824 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 524288 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 524288 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 524288 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 524288 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 524288 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 524288 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 524288 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 524288 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 524288 0x40027DD: main (pearson.cpp:17)
+   n1: 61440 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 61440 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 61440 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 61440 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 61440 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 14882 in 7 places, all below massif's threshold (1.00%)
+ n1: 8192 0x49B449B: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B449B: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B8879: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x4003939: open (fstream:345)
+     n1: 8192 0x4003939: open (fstream:745)
+      n1: 8192 0x4003939: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40027DD: main (pearson.cpp:17)
+#-----------
+snapshot=18
+#-----------
+time=136865408
+mem_heap_B=715241
+mem_heap_extra_B=1295
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=143596322
+mem_heap_B=748009
+mem_heap_extra_B=1359
+mem_stacks_B=0
+heap_tree=detailed
+n4: 748009 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 651264 0x4002D3A: Vector (vector.cpp:22)
+  n3: 651264 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 524288 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 524288 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 524288 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 524288 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 524288 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 524288 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 524288 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 524288 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 524288 0x40027DD: main (pearson.cpp:17)
+   n1: 122880 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 122880 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 122880 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 122880 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 122880 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 14825 in 7 places, all below massif's threshold (1.00%)
+ n1: 8192 0x49B449B: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B449B: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B8879: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x4003939: open (fstream:345)
+     n1: 8192 0x4003939: open (fstream:745)
+      n1: 8192 0x4003939: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40027DD: main (pearson.cpp:17)
+#-----------
+snapshot=20
+#-----------
+time=151673330
+mem_heap_B=784873
+mem_heap_extra_B=1431
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=157059256
+mem_heap_B=809449
+mem_heap_extra_B=1479
+mem_stacks_B=0
+heap_tree=detailed
+n4: 809449 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 712704 0x4002D3A: Vector (vector.cpp:22)
+  n3: 712704 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 524288 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 524288 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 524288 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 524288 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 524288 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 524288 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 524288 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 524288 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 524288 0x40027DD: main (pearson.cpp:17)
+   n1: 184320 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 184320 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 184320 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 184320 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 184320 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 14825 in 7 places, all below massif's threshold (1.00%)
+ n1: 8192 0x49B449B: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B449B: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B8879: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x4003939: open (fstream:345)
+     n1: 8192 0x4003939: open (fstream:745)
+      n1: 8192 0x4003939: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40027DD: main (pearson.cpp:17)
+#-----------
+snapshot=22
+#-----------
+time=166483489
+mem_heap_B=854505
+mem_heap_extra_B=1567
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=172794517
+mem_heap_B=883177
+mem_heap_extra_B=1623
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=181838416
+mem_heap_B=928233
+mem_heap_extra_B=1711
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=187265064
+mem_heap_B=952809
+mem_heap_extra_B=1759
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=196307580
+mem_heap_B=993769
+mem_heap_extra_B=1839
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=205351486
+mem_heap_B=1034729
+mem_heap_extra_B=1919
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=212586946
+mem_heap_B=1071593
+mem_heap_extra_B=1991
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=221629954
+mem_heap_B=1112553
+mem_heap_extra_B=2071
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=229565218
+mem_heap_B=2206185
+mem_heap_extra_B=4199
+mem_stacks_B=0
+heap_tree=detailed
+n3: 2206185 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2101248 0x4002D3A: Vector (vector.cpp:22)
+  n3: 2101248 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 1572864 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1572864 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1572864 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1572864 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1572864 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1572864 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1572864 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1572864 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1572864 0x40027DD: main (pearson.cpp:17)
+   n1: 520192 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 520192 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 520192 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 520192 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 520192 0x40027DD: main (pearson.cpp:17)
+   n0: 8192 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 31209 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=31
+#-----------
+time=234990597
+mem_heap_B=1178089
+mem_heap_extra_B=2191
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=242226421
+mem_heap_B=1210857
+mem_heap_extra_B=2255
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=249460089
+mem_heap_B=1243625
+mem_heap_extra_B=2319
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=258502511
+mem_heap_B=1284585
+mem_heap_extra_B=2399
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=268539716
+mem_heap_B=1333737
+mem_heap_extra_B=2495
+mem_stacks_B=0
+heap_tree=detailed
+n3: 1333737 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1232896 0x4002D3A: Vector (vector.cpp:22)
+  n3: 1232896 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 180224 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 180224 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 180224 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 180224 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 180224 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 27113 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=36
+#-----------
+time=276068617
+mem_heap_B=1366505
+mem_heap_extra_B=2559
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=283595399
+mem_heap_B=1403369
+mem_heap_extra_B=2631
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=291122997
+mem_heap_B=1436137
+mem_heap_extra_B=2695
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=296141038
+mem_heap_B=1460713
+mem_heap_extra_B=2743
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=303668355
+mem_heap_B=1497577
+mem_heap_extra_B=2815
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=313704942
+mem_heap_B=1542633
+mem_heap_extra_B=2903
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=323743346
+mem_heap_B=1591785
+mem_heap_extra_B=2999
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=333779439
+mem_heap_B=1636898
+mem_heap_extra_B=3102
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=338798753
+mem_heap_B=1661417
+mem_heap_extra_B=3135
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=348836821
+mem_heap_B=1706473
+mem_heap_extra_B=3223
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=353856543
+mem_heap_B=1731049
+mem_heap_extra_B=3271
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=363893304
+mem_heap_B=1776105
+mem_heap_extra_B=3359
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=373928398
+mem_heap_B=1825257
+mem_heap_extra_B=3455
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=383966365
+mem_heap_B=1870313
+mem_heap_extra_B=3543
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=388984877
+mem_heap_B=1894889
+mem_heap_extra_B=3591
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=394003796
+mem_heap_B=1915369
+mem_heap_extra_B=3631
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=399022080
+mem_heap_B=1940002
+mem_heap_extra_B=3694
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=404040669
+mem_heap_B=1964521
+mem_heap_extra_B=3727
+mem_stacks_B=0
+heap_tree=detailed
+n3: 1964521 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1863680 0x4002D3A: Vector (vector.cpp:22)
+  n3: 1863680 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 811008 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 811008 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 811008 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 811008 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 811008 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 27113 in 8 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=54
+#-----------
+time=409059026
+mem_heap_B=1989097
+mem_heap_extra_B=3775
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=414077077
+mem_heap_B=2009634
+mem_heap_extra_B=3830
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=419096170
+mem_heap_B=2034153
+mem_heap_extra_B=3863
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=424114690
+mem_heap_B=2058729
+mem_heap_extra_B=3911
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=429133613
+mem_heap_B=2079209
+mem_heap_extra_B=3951
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=434152939
+mem_heap_B=2103785
+mem_heap_extra_B=3999
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=439171798
+mem_heap_B=2128361
+mem_heap_extra_B=4047
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=444190224
+mem_heap_B=2148841
+mem_heap_extra_B=4087
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=449208416
+mem_heap_B=2173417
+mem_heap_extra_B=4135
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=454226566
+mem_heap_B=3436544
+mem_heap_extra_B=6560
+mem_stacks_B=0
+heap_tree=detailed
+n3: 3436544 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3346432 0x4002D3A: Vector (vector.cpp:22)
+  n4: 3346432 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 1249280 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1249280 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 1249280 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 1249280 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1249280 0x400284A: vector (stl_vector.h:636)
+        n0: 1249280 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=64
+#-----------
+time=457120408
+mem_heap_B=4284440
+mem_heap_extra_B=8240
+mem_stacks_B=0
+heap_tree=detailed
+n3: 4284440 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16408 in 10 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=65
+#-----------
+time=460374273
+mem_heap_B=4333568
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=detailed
+n4: 4333568 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n1: 49152 0x40044A0: allocate (new_allocator.h:151)
+  n1: 49152 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 49152 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 49152 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 49152 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 49152 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 49152 0x400286B: main (pearson.cpp:18)
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=66
+#-----------
+time=463643044
+mem_heap_B=4382720
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=detailed
+n4: 4382720 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 98304 0x40044A0: allocate (new_allocator.h:151)
+  n1: 98304 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 98304 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 98304 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 98304 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 98304 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 98304 0x400286B: main (pearson.cpp:18)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=67
+#-----------
+time=470114871
+mem_heap_B=4481024
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=470180503
+mem_heap_B=4481024
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=detailed
+n4: 4481024 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 196608 0x40044A0: allocate (new_allocator.h:151)
+  n1: 196608 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 196608 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 196608 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 196608 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 196608 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 196608 0x400286B: main (pearson.cpp:18)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=69
+#-----------
+time=483124118
+mem_heap_B=4677632
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=483255254
+mem_heap_B=4677632
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=detailed
+n4: 4677632 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 393216 0x40044A0: allocate (new_allocator.h:151)
+  n1: 393216 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 393216 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 393216 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 393216 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 393216 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 393216 0x400286B: main (pearson.cpp:18)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=71
+#-----------
+time=509142445
+mem_heap_B=5070848
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=509404685
+mem_heap_B=5070848
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=detailed
+n4: 5070848 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 786432 0x40044A0: allocate (new_allocator.h:151)
+  n1: 786432 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 786432 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 786432 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 786432 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 786432 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 786432 0x400286B: main (pearson.cpp:18)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=73
+#-----------
+time=561179160
+mem_heap_B=5857280
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=561703512
+mem_heap_B=5857280
+mem_heap_extra_B=8232
+mem_stacks_B=0
+heap_tree=peak
+n4: 5857280 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4194304 0x4002D3A: Vector (vector.cpp:22)
+  n4: 4194304 0x4002D3A: Vector::Vector(Vector const&) (vector.cpp:26)
+   n1: 2097152 0x400284A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 2097152 0x400284A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:145)
+     n1: 2097152 0x400284A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:266)
+      n1: 2097152 0x400284A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 2097152 0x400284A: vector (stl_vector.h:636)
+        n0: 2097152 0x400284A: main (pearson.cpp:18)
+   n1: 1048576 0x4004246: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 1048576 0x4004246: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:145)
+     n1: 1048576 0x4004246: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:266)
+      n1: 1048576 0x4004246: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:637)
+       n1: 1048576 0x4004246: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:664)
+        n1: 1048576 0x4004246: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:628)
+         n1: 1048576 0x40040EF: push_back (stl_vector.h:1427)
+          n1: 1048576 0x40040EF: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 1048576 0x40027DD: main (pearson.cpp:17)
+   n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (new_allocator.h:191)
+    n1: 1044480 0x4003EA9: construct<Vector, const Vector&> (alloc_traits.h:674)
+     n1: 1044480 0x4003EA9: push_back (stl_vector.h:1421)
+      n1: 1044480 0x4003EA9: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 1044480 0x40027DD: main (pearson.cpp:17)
+   n0: 4096 in 1 place, below massif's threshold (1.00%)
+ n1: 1572864 0x40044A0: allocate (new_allocator.h:151)
+  n1: 1572864 0x40044A0: allocate (alloc_traits.h:614)
+   n1: 1572864 0x40044A0: _M_allocate (stl_vector.h:387)
+    n1: 1572864 0x40044A0: _M_realloc_append<double const&> (vector.tcc:572)
+     n1: 1572864 0x40044A0: push_back (stl_vector.h:1427)
+      n1: 1572864 0x40044A0: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:36)
+       n0: 1572864 0x400286B: main (pearson.cpp:18)
+ n1: 73728 0x493C0EF: pool (eh_alloc.cc:235)
+  n1: 73728 0x493C0EF: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493C0EF: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E2A6: call_init (dl-init.c:74)
+     n1: 73728 0x400E2A6: call_init (dl-init.c:26)
+      n1: 73728 0x400E37C: _dl_init (dl-init.c:121)
+       n1: 73728 0x4026B9F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFEFFEC1A: ???
+          n1: 73728 0x1FFEFFEC27: ???
+           n0: 73728 0x1FFEFFEC38: ???
+ n0: 16384 in 9 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=75
+#-----------
+time=664848759
+mem_heap_B=5328896
+mem_heap_extra_B=8216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=1090773025
+mem_heap_B=4274671
+mem_heap_extra_B=4161
+mem_stacks_B=0
+heap_tree=empty
