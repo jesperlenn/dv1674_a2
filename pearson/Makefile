@@ -8,7 +8,7 @@ all: pearson pearson_par verify
 # ======= Sequential =======
 
 pearson: vector dataset analysis pearson.cpp 
-	$(CXX) $(CXXFLAGS) pearson.cpp vector.o dataset.o analysis.o -o pearson_par
+	$(CXX) $(CXXFLAGS) pearson.cpp vector.o dataset.o analysis.o -o pearson
 
 analysis: vector analysis.hpp analysis.cpp
 	$(CXX) $(CXXFLAGS) -c analysis.cpp -o analysis.o
