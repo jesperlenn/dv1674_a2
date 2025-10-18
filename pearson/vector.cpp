@@ -4,8 +4,6 @@ Author: David Holmqvist <daae19@student.bth.se>
 
 #include "vector.hpp"
 #include <cmath>
-#include <iostream>
-#include <vector>
 
 Vector::Vector () : size{ 0 }, data{ nullptr } {}
 

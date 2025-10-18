@@ -20,9 +20,14 @@ typedef struct
 
 typedef struct
 {
-  unsigned segment_size;
-  double *result;
-  Pair *pairs;
+  unsigned prep_start;
+  unsigned prep_end;
+  unsigned pair_start;
+  unsigned pair_end;
+
+  std::vector<Vector> *preps;
+  std::vector<double> *result;
+  std::vector<Pair> *pairs;
 } Argument;
 
 std::vector<double> correlation_coefficients (std::vector<Vector> datasets,
