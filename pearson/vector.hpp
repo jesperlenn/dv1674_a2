@@ -5,11 +5,11 @@ Author: David Holmqvist <daae19@student.bth.se>
 #if !defined(VECTOR_HPP)
 #define VECTOR_HPP
 
-class Vector
+class alignas (double) Vector
 {
 private:
-  unsigned size;
   double *data;
+  unsigned size;
 
 public:
   Vector ();
