@@ -1,5 +1,5 @@
 #import "@preview/lilaq:0.5.0" as lq
-#import "../data/pearson.typ": seq_data
+#import "../data/pearson.typ": seq_data, par_data
 
 #let time_128() = {
   let data = seq_data.at("data").at(0);
@@ -40,6 +40,44 @@
 
   for d in data {
     filtered.push(d.at(0))
+  }
+
+  return filtered
+}
+
+#let time_par_128() = {
+  let filtered = ()
+
+  for d in par_data {
+    filtered.push(d.at(0).at(0) * 1000)
+  }
+
+  return filtered
+}
+
+#let time_par_256() = {
+  let filtered = ()
+
+  for d in par_data {
+    filtered.push(d.at(1).at(0) * 1000)
+  }
+
+  return filtered
+}
+#let time_par_512() = {
+  let filtered = ()
+
+  for d in par_data {
+    filtered.push(d.at(2).at(0) * 1000)
+  }
+
+  return filtered
+}
+#let time_par_1024() = {
+  let filtered = ()
+
+  for d in par_data {
+    filtered.push(d.at(3).at(0) * 1000)
   }
 
   return filtered
@@ -140,3 +178,56 @@
   ),
   lq.bar(range(seq_data.at("stages").len() - 2), seq_data.at("diff_between"))
 )
+
+#let graph_par_128 = lq.diagram(
+  ylabel: [ms],
+  width: 100%,
+  xaxis: (
+    ticks: ("1", "2","4","8","16","32").enumerate(),
+    subticks: none,
+  ),
+  yaxis: (
+    lim: (0, 10)
+  ),
+  lq.plot(range(6), time_par_128(), mark: none)
+)
+
+#let graph_par_256 = lq.diagram(
+  ylabel: [ms],
+  width: 100%,
+  xaxis: (
+    ticks: ("1", "2","4","8","16","32").enumerate(),
+    subticks: none,
+  ),
+  yaxis: (
+    lim: (0, 30)
+  ),
+  lq.plot(range(6), time_par_256(), mark: none)
+)
+
+#let graph_par_512 = lq.diagram(
+  ylabel: [ms],
+  width: 100%,
+  xaxis: (
+    ticks: ("1", "2","4","8","16","32").enumerate(),
+    subticks: none,
+  ),
+  yaxis: (
+    lim: (0, 90)
+  ),
+  lq.plot(range(6), time_par_512(), mark: none)
+)
+
+#let graph_par_1024 = lq.diagram(
+  ylabel: [ms],
+  width: 100%,
+  xaxis: (
+    ticks: ("1", "2","4","8","16","32").enumerate(),
+    subticks: none,
+  ),
+  yaxis: (
+    lim: (0, 400)
+  ),
+  lq.plot(range(6), time_par_1024(), mark: none)
+)
+

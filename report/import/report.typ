@@ -20,13 +20,13 @@
   set heading(numbering: "I.")
 
   show heading.where(level: 1): it => {
-    smallcaps(text(14pt, weight: "regular")[#it])
+    smallcaps(text(16pt, weight: "regular")[#it])
     set block(above: 0em);
     line(length: 100%)
   }
 
   show heading.where(level: 2): it => {
-    smallcaps(text(12pt, weight: "regular")[#it])
+    smallcaps(text(14pt, weight: "regular")[#it])
   }
 
   show figure.where(kind: table): it => {
@@ -35,6 +35,8 @@
 
     it
   }
+
+  show figure.where(kind: "graph"): set figure(placement: top)
 
   set table(
     stroke: (x, y) => {

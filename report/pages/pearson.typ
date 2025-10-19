@@ -1,4 +1,4 @@
-#import "../import/graphs.typ": graph_all, graph_average_difference, graph_average_diff_between
+#import "../import/graphs.typ": graph_all, graph_average_difference, graph_average_diff_between, graph_par_128, graph_par_256, graph_par_512, graph_par_1024
 
 = Pearson
 
@@ -86,9 +86,7 @@ The fifth step focused on IO the functions taking the most time now were `dot`, 
   )
 )<table-5-step>
 
-The final step taken is vector alignment, by using `alignas(double)`. Aligning the vector class to the primary value in the data array, gave us a slight performance increase. This lowered the L1 cache misses, by 0.21% and LL cache misses by
-//TODO: get cache LL difference
-and gave us a speed increase of 6.05% from the previous step, @table-6-step, and 94.93% from the original. Leaving us at the final time of 376ms for size 1024 compared to 20,490ms for the original with the same size.
+The final step taken is vector alignment, by using `alignas(double)`. Aligning the vector class to the primary value in the data array, gave us a slight performance increase. This lowered the L1 cache misses by 0.21% and gave us a speed increase of 6.05% from the previous step, @table-6-step, and 94.93% from the original. Leaving us at the final time of 376ms for size 1024 compared to 20,490ms for the original with the same size.
 
 #figure(
   caption: [Changes between IO and the alignment step for size 1024.],
@@ -104,25 +102,9 @@ and gave us a speed increase of 6.05% from the previous step, @table-6-step, and
   )
 )<table-6-step>
 
-#place(
-  center + bottom,
-  float: true,
-  scope: "parent",
-  clearance: 2em,
-)[
-  #figure(
-    caption: [Illustration of all the different sizes through all the take steps.],
-    kind: "graph",
-    supplement: [Graph],
-    graph_all
-  )<graph-time-all>
-
-]
-
 All the changes are illustrated in @graph-time-all showing all the time differences through out the steps on different vector sizes. Due to the size 1024 over shadowing the other values, @graph-difference might be better to look at. The second graph shows the removed time in percent compared to the original while @graph-diff-between shows the removed time in percent from the previous step, or with other words, the impact.
 
 #figure(
-  placement: top,
   caption: [Illustration of the total removed time in percent from the base.],
   kind: "graph",
   supplement: [Graph],
@@ -130,13 +112,77 @@ All the changes are illustrated in @graph-time-all showing all the time differen
 )<graph-difference>
 
 #figure(
-  placement: bottom,
   caption: [Illustration of the total removed time in percent from the previous step.],
   kind: "graph",
   supplement: [Graph],
   graph_average_diff_between
 )<graph-diff-between>
 
-Several  steps to optimize the program were taken, such as caching, loop unfolding, and simple optimisation flags. We will only show the ones actually providing a positive time difference, meaning manual vectorisation using libraries such as `immintrin.h` was discarded due to worsening the time with ~50ms.
+#figure(
+  caption: [Illustration of all the different sizes through all the taken steps.],
+  kind: "graph",
+  supplement: [Graph],
+  graph_all
+)<graph-time-all>
 
+
+== Parallelism
+
+There are some steps needed to achieve parallelism for the pearson program. Firstly a way for the user to specify the amount of wanted threads, secondly split up the work evenly, and lastly a safe way to get the results. To get the thread count a third argument for the binary was specified, thread count, which is used to separate the data evenly and create the wanted threads.
+
+Separating the workload proved to be more of a hassle than expected, the `dot` method isn't run between all possible column pairs in the matrix, instead every column pairs with every column in front it. This can be visualized as _pair triangle_, meaning we can calculate the calculation count using: 
+$
+"pair count" = ("vector size" * ("vector size" - 1)) / 2
+$
+, due to the last vector not being multiplied to it self, one is removed from it. The result of the multiplication will always be a multiple of two, thanks to the vector size. We then calculate the pair segment size which will be used to separate them between the threads:
+$
+"segment size" = ("pair count") / ("thread count")
+$
+This is we needed to execute the `dot` method evenly across all the threads. But this excludes the `prepeare` method, leaving potential for parallelism. We continued to separate the dataset between the threads which proved to be simpler than the previous one, the only issue was the dependency between `dot` and `prepeare`. `dot` need `prepeare` to run on both the vectors in the calculation before executing. Giving us two choices: (1) running `prepeare` every time `dot` needed it, skipping the calculation if it was done, or (2) run `prepeare` on all the vectors before continuing. Due to all the needed mutex locks for the first option to mitigate all the race conditions, option two was chosen.
+
+In conclusion, the program first separates the dataset between the threads, then it starts the threads which run the `prepeare` method on each vector. The main thread continues to add the vectors to pairs giving them their index for the result and then stops at a `pthread_barrier`, when all the other threads are done processing they'll reach the same barrier, which will let them proceed when all threads reach it. The threads continue to process the `dot` method and places the result in the result vector at the given index, they'll join the main thread when the processing is done.
+
+The same tests were run at the same sizes for each thread count, 1 to 32, giving the results shown through @graph-par-128 to @graph-par-1024.
+
+- Size 128 didn't showed any improvement through out the threads, with a best time of 5.3ms using two, four, and eight threads. This isn't better than the sequential version, meaning a this size threads aren't worth it.
+
+#figure(
+  caption: [Illustration of time over different thread counts for size 128.],
+  kind: "graph",
+  supplement: [Graph],
+  graph_par_128
+)<graph-par-128>
+
+- Size 256 showed slight improvement, with the greatest different from the sequential version at four threads at 17.7ms, which is a reduction of 1.1ms
+
+#figure(
+  caption: [Illustration of time over different thread counts for size 256.],
+  kind: "graph",
+  supplement: [Graph],
+  graph_par_256
+)<graph-par-256>
+
+- Size 512 shows a slightly better situation than the other two, with a best time of 68.2ms at eight threads, which is a reduction of 9.1ms.
+
+#figure(
+  caption: [Illustration of time over different thread counts for size 512.],
+  kind: "graph",
+  supplement: [Graph],
+  graph_par_512
+)<graph-par-512>
+
+- Size 1024 gave the best improvement, with a best time of 267ms at eight threads, which is a reduction of 109ms.
+
+#figure(
+  caption: [Illustration of time over different thread counts for size 1024.],
+  kind: "graph",
+  supplement: [Graph],
+  graph_par_1024
+)<graph-par-1024>
+
+Though there simply aren't enough data to fully utilize the whole CPU, the greatest utilization reached was 162.1% with 16 threads and size 1024, which didn't give the best results either way.
+
+== What more?
+
+Vectorisation using libraries such as `immintrin.h` could improve CPU utilization, performing several calculations simultaneously. This could give performance improvements, though the data sizes in this project seem to be too small to gain enough time to cover for the preparations. Moving the thread preparations to the `read` function could improve some overhead, the function itself could probably be improved with some other file reading or double conversion utility, though both `read` and `write` are heavily IO bound.
 
