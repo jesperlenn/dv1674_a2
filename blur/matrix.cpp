@@ -122,17 +122,17 @@ unsigned Matrix::get_color_max() const
     return color_max;
 }
 
-unsigned char const* Matrix::get_R() const
+unsigned char * Matrix::get_R() const
 {
     return R;
 }
 
-unsigned char const* Matrix::get_G() const
+unsigned char * Matrix::get_G() const
 {
     return G;
 }
 
-unsigned char const* Matrix::get_B() const
+unsigned char * Matrix::get_B() const
 {
     return B;
 }
