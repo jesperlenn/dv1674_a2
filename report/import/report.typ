@@ -2,8 +2,9 @@
   set page(
     paper: "a4",
     columns: 2,
-    margin: 1.5cm
+    margin: 1.5cm,
   )
+
   set par(
     first-line-indent: 1em,
     justify: true,

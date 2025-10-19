@@ -21,9 +21,10 @@
 #outline()
 
 #counter(page).update(1)
+#set page(numbering: "1")
 
 #include "pages/introduction.typ"
 #include "pages/method.typ"
 #include "pages/pearson.typ"
 #include "pages/blur.typ"
-#include "pages/results.typ"
+#include "pages/discussion.typ"
