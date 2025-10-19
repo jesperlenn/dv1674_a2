@@ -11,7 +11,7 @@
     align(
       center + horizon, 
       grid(
-        rows: (1fr, 2fr, 1fr),
+        rows: (1fr, 1fr, 1fr),
         [
           #align(center, text(26pt, weight: "bold")[#title])
           #line(length: 100%)
