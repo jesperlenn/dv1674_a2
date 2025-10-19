@@ -29,6 +29,44 @@
     smallcaps(text(12pt, weight: "regular")[#it])
   }
 
+  show figure.where(kind: table): it => {
+    set figure.caption(position: top)
+    set block(above: 1em, below: 1em)
+
+    it
+  }
+
+  set table(
+    stroke: (x, y) => {
+    if y == 0 {
+      (bottom: 0.7pt + black)
+    }
+  },
+    fill: (_, y) => {
+      if not calc.even(y) {
+        luma(230)
+      }
+    },
+    inset: (right: 1.5em),
+  )
+
+  show table.cell: it => {
+    if it.x == 0 {
+      align(left, strong(it))
+    } else if it.y == 0 {
+      strong(it) 
+    } else if it.body == [] {
+      pad(..it.inset)[_N/A_]
+    } else {
+      it
+    }
+  }
+
+  show table: it => {
+    set par(justify: false)
+    rect(inset: 0.35pt, stroke: 0.7pt + black, it)
+  }
+
   doc
 }
 

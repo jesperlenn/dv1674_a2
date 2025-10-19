@@ -2,6 +2,8 @@
 #let seq_data = (
   name: "seq-data",
   stages: ("Base", "O2", "O3", "Cache", "Locality", "Loop", "IO", "Alignment"),
+  differences: (74.38, 82.34, 88.64, 90.20, 94.64, 94.93),
+  diff_between: (74.38, 32.67, 40.31, 17.62, 45.16, 6.05),
   data: (
   (
   (0.0514, 0.07, 99.00, 0.42, 90221, 76.80, 507291968, 0.0, 0.0),

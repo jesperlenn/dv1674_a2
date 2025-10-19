@@ -96,3 +96,47 @@
   ),
   lq.plot(range(time_1024().len()), time_1024(), mark:"none", color: black)
 )
+
+#let graph_all = lq.diagram(
+  ylabel: [Time (s)],
+  width: 100%,
+  xaxis: (
+    ticks: seq_data.at("stages")
+      .map(rotate.with(-45deg, reflow: true))
+      .map(align.with(right))
+      .enumerate(),
+    subticks: none
+  ),
+  lq.plot(range(time_128().len()), time_128(), mark:"none", label: [128]),
+  lq.plot(range(time_256().len()), time_256(), mark:"none", label: [256]),
+  lq.plot(range(time_512().len()), time_512(), mark:"none", label: [512]),
+  lq.plot(range(time_1024().len()), time_1024(), mark:"none", label: [1024]),
+)
+
+#let graph_average_difference = lq.diagram(
+  ylabel: [%],
+  width: 100%,
+  xaxis: (
+    ticks: seq_data.at("stages")
+      .slice(2)
+      .map(rotate.with(-45deg, reflow: true))
+      .map(align.with(right))
+      .enumerate(),
+    subticks: none
+  ),
+  lq.bar(range(seq_data.at("stages").len() - 2), seq_data.at("differences"))
+)
+
+#let graph_average_diff_between = lq.diagram(
+  ylabel: [%],
+  width: 100%,
+  xaxis: (
+    ticks: seq_data.at("stages")
+      .slice(2)
+      .map(rotate.with(-45deg, reflow: true))
+      .map(align.with(right))
+      .enumerate(),
+    subticks: none
+  ),
+  lq.bar(range(seq_data.at("stages").len() - 2), seq_data.at("diff_between"))
+)
