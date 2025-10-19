@@ -104,7 +104,7 @@ namespace Filter
                 }
 
                 int yD = y + wi;
-                if (yD < W) 
+                if (yD < H) 
                 {
                     int indexD = index + wi*W;
                     r += wc * R_Scratch[indexD];
