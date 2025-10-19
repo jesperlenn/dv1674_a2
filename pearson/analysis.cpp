@@ -14,6 +14,8 @@ namespace Analysis
 {
 
 #ifdef PAR
+// Barrier used to sync all the threads and wait for the
+// pairs to be created.
 pthread_barrier_t prep_barrier;
 
 std::vector<double>
@@ -27,18 +29,23 @@ correlation_coefficients (std::vector<Vector> datasets, unsigned threads)
   std::vector<Pair> pairs;
   std::vector<double> results;
 
+  // Calculate all the sizes
   size = datasets.size ();
   prep_size = size / threads;
   result_size = size * (size - 1) / 2;
   segment_size = result_size / threads;
 
+  // Reserve the needed space
   pairs.reserve (result_size);
   results.reserve (result_size);
 
   Argument *arg;
 
+  // Init the barrier
   pthread_barrier_init (&prep_barrier, nullptr, threads + 1);
 
+  // loop through the thread count creating threads with the needed
+  // sizes and starting points.
   for (i = 0; i < threads; i++)
     {
       arg = new Argument;
@@ -52,24 +59,30 @@ correlation_coefficients (std::vector<Vector> datasets, unsigned threads)
       arg->result = &results;
 
       pthread_t thread;
+      // create thread
       pthread_create (&thread, nullptr, worker_thread, (void *)arg);
+      // place it in the thread vector
       workers.push_back (thread);
     }
 
   index = 0;
 
+  // create the pairs
   for (i = 0; i < size - 1; i++)
     {
       for (j = i + 1; j < size; j++)
         {
+          // add pair to pairs with the index it'll have in results
           pairs.push_back (Pair{ index, &datasets[i], &datasets[j] });
           results.push_back (0);
           index++;
         }
     }
 
+  // wait till other threads are ready
   pthread_barrier_wait (&prep_barrier);
 
+  // join the threads
   for (i = 0; i < threads; i++)
     {
       pthread_join (workers[i], nullptr);
@@ -86,13 +99,18 @@ worker_thread (void *args)
   unsigned i, index;
   double r;
 
+  // loop through all the vectors in the segment
+  // and prepeare them
   for (i = arg->prep_start; i < arg->prep_end; i++)
     {
       (*arg->preps)[i].prepeare ();
     }
 
+  // wait till main thread is done with the pairs.
   pthread_barrier_wait (&prep_barrier);
 
+  // preform the final calculations on the vectors and
+  // place them in a preallocated vector. (safe from race conditions)
   for (unsigned i = arg->pair_start; i < arg->pair_end; i++)
     {
       vec_1 = (*arg->pairs)[i].vec_1;
@@ -117,12 +135,14 @@ correlation_coefficients (std::vector<Vector> datasets)
   unsigned size;
   Vector vec1, vec2;
 
+  // prepeare the vectors
   size = datasets.size ();
   for (unsigned i = 0; i < size; i++)
     {
       datasets[i].prepeare ();
     }
 
+  // preform final calculations
   for (unsigned sample_1 = 0; sample_1 < size - 1; sample_1++)
     {
       for (unsigned sample_2 = sample_1 + 1; sample_2 < size; sample_2++)

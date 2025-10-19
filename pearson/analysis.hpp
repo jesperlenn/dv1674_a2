@@ -12,6 +12,7 @@ namespace Analysis
 {
 
 #ifdef PAR
+// one pair and its result index
 typedef struct
 {
   unsigned index;
@@ -19,6 +20,7 @@ typedef struct
   Vector *vec_2;
 } Pair;
 
+// Argument for worker threads
 typedef struct
 {
   unsigned prep_start;

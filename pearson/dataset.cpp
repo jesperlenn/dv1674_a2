@@ -35,6 +35,7 @@ read (std::string filename)
 
   std::getline (f, line); // ignore first newline
 
+  // pre allocate needed space.
   result.reserve (dimension);
   while (std::getline (f, line))
     {
@@ -63,6 +64,7 @@ write (std::vector<double> data, std::string filename)
 
   for (unsigned i = 0; i < data.size (); i++)
     {
+      // writing to file without clearing buffer.
       f << std::setprecision (std::numeric_limits<double>::digits10 + 1)
         << data[i] << "\n";
     }

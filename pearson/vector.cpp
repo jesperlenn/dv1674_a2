@@ -109,6 +109,7 @@ Vector::div (const double &div)
 void
 Vector::prepeare ()
 {
+  // Doing all the needed calculations internally saving them on itself
   double mean = this->mean ();
   this->sub (mean);
   double mag = this->magnitude ();

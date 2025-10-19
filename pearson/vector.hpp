@@ -18,15 +18,21 @@ public:
   Vector (const Vector &other);
   ~Vector ();
 
+  // Get magnitude
   double magnitude () const;
+  // Get mean
   double mean () const;
-  double normalize () const;
+  // calculate dot
   double dot (const Vector &rhs) const;
 
   unsigned get_size () const;
   double *get_data ();
+
+  // Perform subtraction on all elements
   void sub (const double &sub);
+  // Perform division on all elements
   void div (const double &div);
+  // prepeare vector for further calculations
   void prepeare ();
 
   double operator[] (unsigned i) const;
