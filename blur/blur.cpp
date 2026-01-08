@@ -10,8 +10,8 @@ Author: David Holmqvist <daae19@student.bth.se>
 
 int main(int argc, char const* argv[])
 {
-    if (argc != 4) {
-        std::cerr << "Usage: " << argv[0] << " [radius] [infile] [outfile]\n";
+    if (argc != 5) {
+        std::cerr << "Usage: " << argv[0] << " [radius] [infile] [outfile] [threads]\n";
         std::exit(1);
     }
 
@@ -20,8 +20,9 @@ int main(int argc, char const* argv[])
 
     Matrix m { reader(argv[2]) };
     unsigned int radius { static_cast<unsigned>(std::stoul(argv[1])) };
+    unsigned int threads = std::stoi(argv[4]);
 
-    Matrix blurred { Filter::blur(m, radius) };
+    Matrix blurred { Filter::blur(m, radius, threads) };
     writer(blurred, argv[3]);
 
     return 0;

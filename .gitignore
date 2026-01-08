@@ -1,6 +1,7 @@
 # Binaries
 blur/blur
 pearson/pearson
+blur/blur_par
 
 # Object files
 *.o
