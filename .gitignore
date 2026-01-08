@@ -1,8 +1,10 @@
 # Binaries
-blur
-pearson
+blur/blur
+pearson/pearson
 
 # Object files
 *.o
+
+blur/data_o/blur_im*
 
 .DS_Store

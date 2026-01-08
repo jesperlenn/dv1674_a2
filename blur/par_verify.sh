@@ -12,13 +12,13 @@ do
     do
         ./blur_par 15 "data/$image.ppm" "./data_o/blur_${image}_par.ppm" $thread
 
-        if ! cmp -s "./data_o/blur_${image}.ppm" "./data_o/blur_${image}_par.ppm"
+        if ! cmp -s "./data_o/${image}.ppm" "./data_o/blur_${image}_par.ppm"
         then
             echo "${red}Error: Incongruent output data detected when blurring image $image.ppm with $thread thread(s)${reset}"
             status=1
         fi
 
-        rm "./data_o/blur_${image}_par.ppm"
+        # rm "./data_o/blur_${image}_par.ppm"
     done
 done
 
