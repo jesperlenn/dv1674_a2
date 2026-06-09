@@ -8,11 +8,11 @@ reset=$(tput sgr0)
 
 for image in im1 im2 im3 im4
 do
-    ./blur 15 "data/$image.ppm" "./data_o/blur_${image}_par.ppm" 
+    ./blur 15 "data/$image.ppm" "./data_o/blur_${image}_blurred.ppm" 
 
-    if ! cmp -s "./data_o/${image}_seq.ppm" "./data_o/blur_${image}_par.ppm"
+    if ! cmp -s "./data_o/${image}_seq.ppm" "./data_o/blur_${image}_blurred.ppm"
     then
-        echo "${red}Error: Incongruent output data detected when blurring image $image.ppm with $thread thread(s)${reset}"
+        echo "${red}Error: Incongruent output data detected when blurring image $image.ppm"
         status=1
     fi
 
