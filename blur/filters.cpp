@@ -14,84 +14,97 @@ void get_weights(int n, double *weights_out) {
     }
 }
 
-}
+} // namespace Gauss
 
 Matrix blur(Matrix m, const int radius) {
-    Matrix scratch{PPM::max_dimension};
+
     auto dst{m};
 
     double w[Gauss::max_radius]{};
     Gauss::get_weights(radius, w);
 
-    for (auto x{0}; x < dst.get_x_size(); x++) {
-        for (auto y{0}; y < dst.get_y_size(); y++) {
+    const int W = dst.get_x_size();
+    const int H = dst.get_y_size();
+    const int size = W * H;
 
-            auto r{w[0] * dst.r(x, y)},
-                 g{w[0] * dst.g(x, y)},
-                 b{w[0] * dst.b(x, y)},
-                 n{w[0]};
+    unsigned char *R = dst.get_R();
+    unsigned char *G = dst.get_G();
+    unsigned char *B = dst.get_B();
 
-            for (auto wi{1}; wi <= radius; wi++) {
-                auto wc{w[wi]};
-                auto x2{x - wi};
+    unsigned char *R_Scratch = new unsigned char[size];
+    unsigned char *G_Scratch = new unsigned char[size];
+    unsigned char *B_Scratch = new unsigned char[size];
 
+    for (int x = 0; x < W; ++x) {
+
+        for (int y = 0; y < H; ++y) {
+            int index = y * W + x;
+            double r = w[0] * R[index];
+            double g = w[0] * G[index];
+            double b = w[0] * B[index];
+            double n = w[0];
+
+            for (int wi = 1; wi <= radius; ++wi) {
+                double wc = w[wi];
+                int x2 = x - wi;
                 if (x2 >= 0) {
-                    r += wc * dst.r(x2, y);
-                    g += wc * dst.g(x2, y);
-                    b += wc * dst.b(x2, y);
+                    int index2 = y * W + x2;
+                    r += wc * R[index2];
+                    g += wc * G[index2];
+                    b += wc * B[index2];
                     n += wc;
                 }
 
                 x2 = x + wi;
-                if (x2 < dst.get_x_size()) {
-                    r += wc * dst.r(x2, y);
-                    g += wc * dst.g(x2, y);
-                    b += wc * dst.b(x2, y);
+                if (x2 < W) {
+                    int index2 = y * W + x2;
+                    r += wc * R[index2];
+                    g += wc * G[index2];
+                    b += wc * B[index2];
                     n += wc;
                 }
             }
-
-            scratch.r(x, y) = r / n;
-            scratch.g(x, y) = g / n;
-            scratch.b(x, y) = b / n;
+            R_Scratch[index] = r / n;
+            G_Scratch[index] = g / n;
+            B_Scratch[index] = b / n;
         }
     }
 
+    for (int x = 0; x < W; ++x) {
+        for (int y = 0; y < H; ++y) {
+            int index = y * W + x;
+            double r = w[0] * R_Scratch[index];
+            double g = w[0] * G_Scratch[index];
+            double b = w[0] * B_Scratch[index];
+            double n = w[0];
 
-    for (auto x{0}; x < dst.get_x_size(); x++) {
-        for (auto y{0}; y < dst.get_y_size(); y++) {
-
-            auto r{w[0] * scratch.r(x, y)},
-                 g{w[0] * scratch.g(x, y)},
-                 b{w[0] * scratch.b(x, y)},
-                 n{w[0]};
-
-            for (auto wi{1}; wi <= radius; wi++) {
-                auto wc{w[wi]};
-                auto y2{y - wi};
-
+            for (int wi = 1; wi <= radius; ++wi) {
+                double wc = w[wi];
+                int y2 = y - wi;
                 if (y2 >= 0) {
-                    r += wc * scratch.r(x, y2);
-                    g += wc * scratch.g(x, y2);
-                    b += wc * scratch.b(x, y2);
+                    int index2 = y2 * W + x;
+                    r += wc * R_Scratch[index2];
+                    g += wc * G_Scratch[index2];
+                    b += wc * B_Scratch[index2];
                     n += wc;
                 }
 
                 y2 = y + wi;
-                if (y2 < dst.get_y_size()) {
-                    r += wc * scratch.r(x, y2);
-                    g += wc * scratch.g(x, y2);
-                    b += wc * scratch.b(x, y2);
+                if (y2 < H) {
+                    int index2 = y2 * W + x;
+                    r += wc * R_Scratch[index2];
+                    g += wc * G_Scratch[index2];
+                    b += wc * B_Scratch[index2];
                     n += wc;
                 }
             }
 
-            dst.r(x, y) = r / n;
-            dst.g(x, y) = g / n;
-            dst.b(x, y) = b / n;
+            R[index] = r / n;
+            G[index] = g / n;
+            B[index] = b / n;
         }
     }
-
     return dst;
 }
-}
+
+} // namespace Filter
