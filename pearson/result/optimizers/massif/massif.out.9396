@@ -1,0 +1,555 @@
+desc: --massif-out-file=./result/optimizers/massif/massif.out.%p
+cmd: ././optimizers/pearson ./data/256.data ./data_o/256_seq.data
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=11733928
+mem_heap_B=128984
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=detailed
+n7: 128984 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 73728 0x493987F: pool (eh_alloc.cc:235)
+  n1: 73728 0x493987F: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493987F: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E1EE: call_init (dl-init.c:74)
+     n1: 73728 0x400E1EE: call_init (dl-init.c:26)
+      n1: 73728 0x400E2CC: _dl_init (dl-init.c:121)
+       n1: 73728 0x402735F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFF0000E2: ???
+          n1: 73728 0x1FFF0000F9: ???
+           n0: 73728 0x1FFF000109: ???
+ n1: 40960 0x4002E42: Vector (vector.cpp:26)
+  n3: 40960 0x4002E42: Vector::Vector(Vector const&) (vector.cpp:36)
+   n1: 32768 0x40041A6: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 32768 0x40041A6: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:165)
+     n1: 32768 0x40041A6: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:287)
+      n1: 32768 0x40041A6: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:661)
+       n1: 32768 0x40041A6: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:715)
+        n1: 32768 0x40041A6: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:637)
+         n1: 32768 0x4004047: push_back (stl_vector.h:1417)
+          n1: 32768 0x4004047: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 32768 0x40028A0: main (pearson.cpp:17)
+   n1: 6144 0x4003DFD: construct<Vector, const Vector&> (new_allocator.h:203)
+    n1: 6144 0x4003DFD: construct<Vector, const Vector&> (alloc_traits.h:714)
+     n1: 6144 0x4003DFD: push_back (stl_vector.h:1411)
+      n1: 6144 0x4003DFD: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 6144 0x40028A0: main (pearson.cpp:17)
+   n1: 2048 0x4004184: construct<Vector, const Vector&> (new_allocator.h:203)
+    n1: 2048 0x4004184: construct<Vector, const Vector&> (alloc_traits.h:714)
+     n1: 2048 0x4004184: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:594)
+      n1: 2048 0x4004047: push_back (stl_vector.h:1417)
+       n1: 2048 0x4004047: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+        n0: 2048 0x40028A0: main (pearson.cpp:17)
+ n1: 8192 0x49B60AB: _M_allocate_internal_buffer (fstream.tcc:61)
+  n1: 8192 0x49B60AB: std::basic_filebuf<char, std::char_traits<char> >::_M_allocate_internal_buffer() (fstream.tcc:54)
+   n1: 8192 0x49B6952: std::basic_filebuf<char, std::char_traits<char> >::open(char const*, std::_Ios_Openmode) (fstream.tcc:192)
+    n1: 8192 0x40038CE: open (fstream:345)
+     n1: 8192 0x40038CE: open (fstream:745)
+      n1: 8192 0x40038CE: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:23)
+       n0: 8192 0x40028A0: main (pearson.cpp:17)
+ n1: 2048 0x4002E04: Vector::Vector(unsigned int) (vector.cpp:26)
+  n1: 2048 0x4003D11: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:39)
+   n0: 2048 0x40028A0: main (pearson.cpp:17)
+ n1: 1536 0x4004003: _M_construct<char const*> (basic_string.tcc:235)
+  n1: 1536 0x4004003: basic_string (basic_string.h:716)
+   n1: 1536 0x4004003: basic_stringbuf (sstream:157)
+    n1: 1536 0x4004003: basic_stringstream (sstream:1206)
+     n1: 1536 0x4004003: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:38)
+      n0: 1536 0x40028A0: main (pearson.cpp:17)
+ n1: 1536 0x49F62A8: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long) (basic_string.tcc:395)
+  n1: 1536 0x4959EF5: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long) [clone .isra.0] (basic_string.tcc:487)
+   n1: 1536 0x495A4F2: append (basic_string.h:1594)
+    n1: 1536 0x495A4F2: std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char) (istream-string.cc:161)
+     n1: 1536 0x4003B15: getline<char, std::char_traits<char>, std::allocator<char> > (basic_string.h:4464)
+      n1: 1536 0x4003B15: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:36)
+       n0: 1536 0x40028A0: main (pearson.cpp:17)
+ n0: 984 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=2
+#-----------
+time=22973171
+mem_heap_B=180696
+mem_heap_extra_B=424
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=37348203
+mem_heap_B=249304
+mem_heap_extra_B=688
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=52028942
+mem_heap_B=316945
+mem_heap_extra_B=967
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=61641652
+mem_heap_B=363992
+mem_heap_extra_B=1128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=76242779
+mem_heap_B=431576
+mem_heap_extra_B=1392
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=86085645
+mem_heap_B=478680
+mem_heap_extra_B=1576
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=93467332
+mem_heap_B=511448
+mem_heap_extra_B=1704
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=104130843
+mem_heap_B=562648
+mem_heap_extra_B=1904
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=117006580
+mem_heap_B=1139712
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=131179100
+mem_heap_B=1155072
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=138138450
+mem_heap_B=1150976
+mem_heap_extra_B=4144
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=148579212
+mem_heap_B=1171456
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=161106512
+mem_heap_B=1171456
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=175289226
+mem_heap_B=1210368
+mem_heap_extra_B=4184
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=185738001
+mem_heap_B=1210368
+mem_heap_extra_B=4184
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=196186776
+mem_heap_B=1210368
+mem_heap_extra_B=4184
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=206635551
+mem_heap_B=1210368
+mem_heap_extra_B=4184
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=217084339
+mem_heap_B=1210368
+mem_heap_extra_B=4184
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=225442446
+mem_heap_B=1208320
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=237058478
+mem_heap_B=1271808
+mem_heap_extra_B=4168
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=247507253
+mem_heap_B=1271808
+mem_heap_extra_B=4168
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=257956041
+mem_heap_B=1271808
+mem_heap_extra_B=4168
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=272583808
+mem_heap_B=1273856
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=detailed
+n4: 1273856 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1052672 0x4002E42: Vector (vector.cpp:26)
+  n4: 1052672 0x4002E42: Vector::Vector(Vector const&) (vector.cpp:36)
+   n1: 524288 0x400290A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 524288 0x400290A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:165)
+     n1: 524288 0x400290A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:287)
+      n1: 524288 0x400290A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:661)
+       n1: 524288 0x400290A: vector (stl_vector.h:626)
+        n0: 524288 0x400290A: main (pearson.cpp:18)
+   n1: 262144 0x40041A6: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 262144 0x40041A6: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:165)
+     n1: 262144 0x40041A6: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:287)
+      n1: 262144 0x40041A6: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:661)
+       n1: 262144 0x40041A6: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:715)
+        n1: 262144 0x40041A6: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:637)
+         n1: 262144 0x4004047: push_back (stl_vector.h:1417)
+          n1: 262144 0x4004047: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 262144 0x40028A0: main (pearson.cpp:17)
+   n1: 260096 0x4003DFD: construct<Vector, const Vector&> (new_allocator.h:203)
+    n1: 260096 0x4003DFD: construct<Vector, const Vector&> (alloc_traits.h:714)
+     n1: 260096 0x4003DFD: push_back (stl_vector.h:1411)
+      n1: 260096 0x4003DFD: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 260096 0x40028A0: main (pearson.cpp:17)
+   n0: 6144 in 4 places, all below massif's threshold (1.00%)
+ n1: 131072 0x4004554: allocate (new_allocator.h:162)
+  n1: 131072 0x4004554: allocate (alloc_traits.h:638)
+   n1: 131072 0x4004554: _M_allocate (stl_vector.h:389)
+    n1: 131072 0x4004554: _M_realloc_append<double const&> (vector.tcc:580)
+     n1: 131072 0x4004554: push_back (stl_vector.h:1417)
+      n1: 131072 0x4004554: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:21)
+       n0: 131072 0x400292B: main (pearson.cpp:18)
+ n1: 73728 0x493987F: pool (eh_alloc.cc:235)
+  n1: 73728 0x493987F: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493987F: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E1EE: call_init (dl-init.c:74)
+     n1: 73728 0x400E1EE: call_init (dl-init.c:26)
+      n1: 73728 0x400E2CC: _dl_init (dl-init.c:121)
+       n1: 73728 0x402735F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFF0000E2: ???
+          n1: 73728 0x1FFF0000F9: ???
+           n0: 73728 0x1FFF000109: ???
+ n0: 16384 in 11 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=25
+#-----------
+time=281698403
+mem_heap_B=1273856
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=290812998
+mem_heap_B=1273856
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=306003731
+mem_heap_B=1269760
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=315118326
+mem_heap_B=1269760
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=327271404
+mem_heap_B=1273856
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=336385999
+mem_heap_B=1273856
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=345969150
+mem_heap_B=1523712
+mem_heap_extra_B=4136
+mem_stacks_B=0
+heap_tree=peak
+n4: 1523712 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1048576 0x4002E42: Vector (vector.cpp:26)
+  n4: 1048576 0x4002E42: Vector::Vector(Vector const&) (vector.cpp:36)
+   n1: 524288 0x400290A: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 524288 0x400290A: __do_uninit_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:165)
+     n1: 524288 0x400290A: uninitialized_copy<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*> (stl_uninitialized.h:287)
+      n1: 524288 0x400290A: __uninitialized_copy_a<__gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, __gnu_cxx::__normal_iterator<const Vector*, std::vector<Vector> >, Vector*, Vector> (stl_uninitialized.h:661)
+       n1: 524288 0x400290A: vector (stl_vector.h:626)
+        n0: 524288 0x400290A: main (pearson.cpp:18)
+   n1: 262144 0x40041A6: _Construct<Vector, const Vector&> (stl_construct.h:133)
+    n1: 262144 0x40041A6: __do_uninit_copy<const Vector*, const Vector*, Vector*> (stl_uninitialized.h:165)
+     n1: 262144 0x40041A6: uninitialized_copy<const Vector*, Vector*> (stl_uninitialized.h:287)
+      n1: 262144 0x40041A6: __uninitialized_copy_a<const Vector*, const Vector*, Vector*, Vector> (stl_uninitialized.h:661)
+       n1: 262144 0x40041A6: __uninitialized_move_if_noexcept_a<Vector*, Vector*, std::allocator<Vector> > (stl_uninitialized.h:715)
+        n1: 262144 0x40041A6: void std::vector<Vector, std::allocator<Vector> >::_M_realloc_append<Vector const&>(Vector const&) (vector.tcc:637)
+         n1: 262144 0x4004047: push_back (stl_vector.h:1417)
+          n1: 262144 0x4004047: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+           n0: 262144 0x40028A0: main (pearson.cpp:17)
+   n1: 260096 0x4003DFD: construct<Vector, const Vector&> (new_allocator.h:203)
+    n1: 260096 0x4003DFD: construct<Vector, const Vector&> (alloc_traits.h:714)
+     n1: 260096 0x4003DFD: push_back (stl_vector.h:1411)
+      n1: 260096 0x4003DFD: Dataset::read(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (dataset.cpp:43)
+       n0: 260096 0x40028A0: main (pearson.cpp:17)
+   n0: 2048 in 4 places, all below massif's threshold (1.00%)
+ n1: 393216 0x4004554: allocate (new_allocator.h:162)
+  n1: 393216 0x4004554: allocate (alloc_traits.h:638)
+   n1: 393216 0x4004554: _M_allocate (stl_vector.h:389)
+    n1: 393216 0x4004554: _M_realloc_append<double const&> (vector.tcc:580)
+     n1: 393216 0x4004554: push_back (stl_vector.h:1417)
+      n1: 393216 0x4004554: Analysis::correlation_coefficients(std::vector<Vector, std::allocator<Vector> >) (analysis.cpp:21)
+       n0: 393216 0x400292B: main (pearson.cpp:18)
+ n1: 73728 0x493987F: pool (eh_alloc.cc:235)
+  n1: 73728 0x493987F: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+   n1: 73728 0x493987F: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+    n1: 73728 0x400E1EE: call_init (dl-init.c:74)
+     n1: 73728 0x400E1EE: call_init (dl-init.c:26)
+      n1: 73728 0x400E2CC: _dl_init (dl-init.c:121)
+       n1: 73728 0x402735F: ??? (in /usr/lib/ld-linux-x86-64.so.2)
+        n1: 73728 0x2: ???
+         n1: 73728 0x1FFF0000E2: ???
+          n1: 73728 0x1FFF0000F9: ???
+           n0: 73728 0x1FFF000109: ???
+ n0: 8192 in 11 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=32
+#-----------
+time=355084726
+mem_heap_B=1404928
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=364200632
+mem_heap_B=1404928
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=379393529
+mem_heap_B=1400832
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=388509435
+mem_heap_B=1400832
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=400664256
+mem_heap_B=1404928
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=409780162
+mem_heap_B=1404928
+mem_heap_extra_B=4176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=421934685
+mem_heap_B=1400832
+mem_heap_extra_B=4160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=428015142
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=443213005
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=458410894
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=473608770
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=488806672
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=504004574
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=519202489
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=534400443
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=549598423
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=564796481
+mem_heap_B=1398784
+mem_heap_extra_B=4152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=573915716
+mem_heap_B=1402880
+mem_heap_extra_B=4168
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=679050721
+mem_heap_B=1125870
+mem_heap_extra_B=2114
+mem_stacks_B=0
+heap_tree=empty
