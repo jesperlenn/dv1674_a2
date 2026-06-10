@@ -2,7 +2,6 @@
 #include "matrix.hpp"
 #include "ppm.hpp"
 #include <cmath>
-
 namespace Filter {
 
 namespace Gauss {
@@ -17,7 +16,6 @@ void get_weights(int n, double *weights_out) {
 } // namespace Gauss
 
 Matrix blur(Matrix m, const int radius) {
-
     auto dst{m};
 
     double w[Gauss::max_radius]{};
@@ -35,75 +33,82 @@ Matrix blur(Matrix m, const int radius) {
     unsigned char *G_Scratch = new unsigned char[size];
     unsigned char *B_Scratch = new unsigned char[size];
 
-    for (int x = 0; x < W; ++x) {
+    // hor
+    for (int index = 0; index < W * H; ++index) {
+        int x = index % W;
 
-        for (int y = 0; y < H; ++y) {
-            int index = y * W + x;
-            double r = w[0] * R[index];
-            double g = w[0] * G[index];
-            double b = w[0] * B[index];
-            double n = w[0];
+        double r = w[0] * R[index];
+        double g = w[0] * G[index];
+        double b = w[0] * B[index];
+        double n = w[0];
 
-            for (int wi = 1; wi <= radius; ++wi) {
-                double wc = w[wi];
-                int x2 = x - wi;
-                if (x2 >= 0) {
-                    int index2 = y * W + x2;
-                    r += wc * R[index2];
-                    g += wc * G[index2];
-                    b += wc * B[index2];
-                    n += wc;
-                }
+        for (int wi = 1; wi <= radius; ++wi) {
+            double wc = w[wi];
 
-                x2 = x + wi;
-                if (x2 < W) {
-                    int index2 = y * W + x2;
-                    r += wc * R[index2];
-                    g += wc * G[index2];
-                    b += wc * B[index2];
-                    n += wc;
-                }
-            }
-            R_Scratch[index] = r / n;
-            G_Scratch[index] = g / n;
-            B_Scratch[index] = b / n;
-        }
-    }
-
-    for (int x = 0; x < W; ++x) {
-        for (int y = 0; y < H; ++y) {
-            int index = y * W + x;
-            double r = w[0] * R_Scratch[index];
-            double g = w[0] * G_Scratch[index];
-            double b = w[0] * B_Scratch[index];
-            double n = w[0];
-
-            for (int wi = 1; wi <= radius; ++wi) {
-                double wc = w[wi];
-                int y2 = y - wi;
-                if (y2 >= 0) {
-                    int index2 = y2 * W + x;
-                    r += wc * R_Scratch[index2];
-                    g += wc * G_Scratch[index2];
-                    b += wc * B_Scratch[index2];
-                    n += wc;
-                }
-
-                y2 = y + wi;
-                if (y2 < H) {
-                    int index2 = y2 * W + x;
-                    r += wc * R_Scratch[index2];
-                    g += wc * G_Scratch[index2];
-                    b += wc * B_Scratch[index2];
-                    n += wc;
-                }
+            int xL = x - wi;
+            if (xL >= 0) {
+                int indexL = index - wi;
+                r += wc * R[indexL];
+                g += wc * G[indexL];
+                b += wc * B[indexL];
+                n += wc;
             }
 
-            R[index] = r / n;
-            G[index] = g / n;
-            B[index] = b / n;
+            int xR = x + wi;
+            if (xR < W) {
+                int indexR = index + wi;
+                r += wc * R[indexR];
+                g += wc * G[indexR];
+                b += wc * B[indexR];
+                n += wc;
+            }
         }
+
+        R_Scratch[index] = r / n;
+        G_Scratch[index] = g / n;
+        B_Scratch[index] = b / n;
     }
+
+    // ver
+    for (int index = 0; index < W * H; ++index) {
+        int y = index / W;
+
+        double r = w[0] * R_Scratch[index];
+        double g = w[0] * G_Scratch[index];
+        double b = w[0] * B_Scratch[index];
+        double n = w[0];
+
+        for (int wi = 1; wi <= radius; ++wi) {
+            double wc = w[wi];
+
+            int yU = y - wi;
+            if (yU >= 0) {
+                int indexU = index - wi * W;
+                r += wc * R_Scratch[indexU];
+                g += wc * G_Scratch[indexU];
+                b += wc * B_Scratch[indexU];
+                n += wc;
+            }
+
+            int yD = y + wi;
+            if (yD < H) {
+                int indexD = index + wi * W;
+                r += wc * R_Scratch[indexD];
+                g += wc * G_Scratch[indexD];
+                b += wc * B_Scratch[indexD];
+                n += wc;
+            }
+        }
+
+        R[index] = r / n;
+        G[index] = g / n;
+        B[index] = b / n;
+    }
+
+    delete[] R_Scratch;
+    delete[] G_Scratch;
+    delete[] B_Scratch;
+
     return dst;
 }
 
