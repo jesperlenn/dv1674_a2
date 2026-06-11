@@ -1,0 +1,89 @@
+
+# started on Thu Jun 11 10:23:55 2026
+
+
+ Performance counter stats for './multithread/blur_par 15 ./data/im1.ppm ./data_o/blur_im1_blurred.ppm 16' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             2,442      page-faults:u                    #   8340.5 faults/sec  page_faults_per_second  ( +-  2.36% )
+            292.79 msec task-clock:u                     #      4.2 CPUs  CPUs_utilized         ( +-  0.23% )
+        10,244,977      L1-dcache-load-misses:u          #      0.9 %  l1d_miss_rate            ( +-  1.04% )  (76.24%)
+            21,944      LLC-loads:u                      #     38.2 %  llc_miss_rate            ( +-  6.98% )  (69.82%)
+            76,119      branch-misses:u                  #      0.1 %  branch_miss_rate         ( +- 14.09% )  (60.45%)
+       138,603,535      branches:u                       #    473.4 M/sec  branch_frequency     ( +-  1.67% )  (57.13%)
+     1,188,899,791      cpu-cycles:u                     #      4.1 GHz  cycles_frequency       ( +-  0.36% )  (51.69%)
+     2,412,867,779      instructions:u                   #      2.1 instructions  insn_per_cycle  ( +-  0.51% )  (38.59%)
+                        TopdownL1                        #     11.7 %  tma_backend_bound      
+                                                         #      8.7 %  tma_bad_speculation      ( +- 11.34% )  (67.84%)
+                                                         #     11.1 %  tma_frontend_bound       ( +-  1.67% )  (69.63%)
+                                                         #     68.5 %  tma_retiring             ( +-  0.65% )  (78.09%)
+
+       0.068712692 +- 0.001218481 seconds time elapsed  ( +-  1.77% )
+
+# started on Thu Jun 11 10:23:55 2026
+
+
+ Performance counter stats for './multithread/blur_par 15 ./data/im2.ppm ./data_o/blur_im2_blurred.ppm 16' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             4,485      page-faults:u                    #   6677.6 faults/sec  page_faults_per_second  ( +-  1.27% )
+            671.65 msec task-clock:u                     #      4.1 CPUs  CPUs_utilized         ( +-  1.60% )
+       109,152,786      L1-dcache-load-misses:u          #      4.9 %  l1d_miss_rate            ( +-  1.84% )  (71.78%)
+         4,789,237      LLC-loads:u                      #      1.7 %  llc_miss_rate            ( +-  1.40% )  (62.50%)
+           159,752      branch-misses:u                  #      0.1 %  branch_miss_rate         ( +- 23.79% )  (54.34%)
+       270,373,229      branches:u                       #    402.6 M/sec  branch_frequency     ( +-  0.75% )  (56.08%)
+     2,676,367,208      cpu-cycles:u                     #      4.0 GHz  cycles_frequency       ( +-  0.88% )  (56.64%)
+     4,822,454,932      instructions:u                   #      1.8 instructions  insn_per_cycle  ( +-  0.76% )  (48.79%)
+                        TopdownL1                        #     16.6 %  tma_backend_bound      
+                                                         #     15.5 %  tma_bad_speculation      ( +- 15.15% )  (65.54%)
+                                                         #     10.1 %  tma_frontend_bound       ( +-  1.80% )  (64.00%)
+                                                         #     57.8 %  tma_retiring             ( +-  0.43% )  (73.57%)
+
+       0.162719623 +- 0.002589304 seconds time elapsed  ( +-  1.59% )
+
+# started on Thu Jun 11 10:23:57 2026
+
+
+ Performance counter stats for './multithread/blur_par 15 ./data/im3.ppm ./data_o/blur_im3_blurred.ppm 16' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             7,287      page-faults:u                    #   6525.4 faults/sec  page_faults_per_second  ( +-  1.78% )
+          1,116.71 msec task-clock:u                     #      4.4 CPUs  CPUs_utilized         ( +-  0.55% )
+        40,493,024      L1-dcache-load-misses:u          #      1.0 %  l1d_miss_rate            ( +-  0.53% )  (73.11%)
+            92,907      LLC-loads:u                      #     61.7 %  llc_miss_rate            ( +-  3.03% )  (65.28%)
+           152,660      branch-misses:u                  #      0.0 %  branch_miss_rate         ( +- 11.95% )  (56.93%)
+       501,098,798      branches:u                       #    448.7 M/sec  branch_frequency     ( +-  0.22% )  (56.89%)
+     4,595,917,364      cpu-cycles:u                     #      4.1 GHz  cycles_frequency       ( +-  0.32% )  (55.78%)
+     8,912,346,329      instructions:u                   #      1.9 instructions  insn_per_cycle  ( +-  0.12% )  (44.82%)
+                        TopdownL1                        #     10.2 %  tma_backend_bound      
+                                                         #     18.2 %  tma_bad_speculation      ( +-  6.13% )  (62.43%)
+                                                         #     10.0 %  tma_frontend_bound       ( +-  0.77% )  (62.42%)
+                                                         #     61.7 %  tma_retiring             ( +-  0.24% )  (72.44%)
+
+       0.252124207 +- 0.001618776 seconds time elapsed  ( +-  0.64% )
+
+# started on Thu Jun 11 10:24:00 2026
+
+
+ Performance counter stats for './multithread/blur_par 15 ./data/im4.ppm ./data_o/blur_im4_blurred.ppm 16' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             8,631      page-faults:u                    #   1540.3 faults/sec  page_faults_per_second  ( +-  2.02% )
+          5,603.53 msec task-clock:u                     #      4.7 CPUs  CPUs_utilized         ( +-  0.42% )
+       200,613,574      L1-dcache-load-misses:u          #      1.0 %  l1d_miss_rate            ( +-  0.26% )  (72.66%)
+         4,121,897      LLC-loads:u                      #      9.9 %  llc_miss_rate            ( +-  4.02% )  (63.64%)
+         1,368,918      branch-misses:u                  #      0.1 %  branch_miss_rate         ( +- 11.30% )  (54.71%)
+     2,410,451,076      branches:u                       #    430.2 M/sec  branch_frequency     ( +-  0.18% )  (54.86%)
+    21,523,083,400      cpu-cycles:u                     #      3.8 GHz  cycles_frequency       ( +-  0.39% )  (55.00%)
+    41,822,641,588      instructions:u                   #      1.9 instructions  insn_per_cycle  ( +-  0.15% )  (45.63%)
+                        TopdownL1                        #      4.5 %  tma_backend_bound      
+                                                         #     30.8 %  tma_bad_speculation      ( +-  7.95% )  (63.67%)
+                                                         #      7.7 %  tma_frontend_bound       ( +-  0.68% )  (63.46%)
+                                                         #     57.0 %  tma_retiring             ( +-  0.21% )  (72.64%)
+
+       1.203495861 +- 0.005804033 seconds time elapsed  ( +-  0.48% )
+
