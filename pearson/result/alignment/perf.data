@@ -1,0 +1,89 @@
+
+# started on Fri Jun  5 15:11:07 2026
+
+
+ Performance counter stats for '././alignment/pearson ./data/128.data ./data_o/128_seq.data' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+               233      page-faults:u                    #  48406.5 faults/sec  page_faults_per_second  ( +-  0.14% )
+              4.81 msec task-clock:u                     #      0.8 CPUs  CPUs_utilized         ( +-  0.51% )
+            60,956      L1-dcache-load-misses:u          #      0.5 %  l1d_miss_rate            ( +- 18.67% )  (38.59%)
+             7,953      LLC-loads:u                      #      9.2 %  llc_miss_rate            ( +-  7.33% )  (26.82%)
+            60,814      branch-misses:u                  #      0.5 %  branch_miss_rate         ( +-  2.02% )  (47.28%)
+        11,502,063      branches:u                       #   2389.6 M/sec  branch_frequency     ( +-  0.35% )  (67.76%)
+        18,330,014      cpu-cycles:u                     #      3.8 GHz  cycles_frequency       ( +-  0.12% )  (87.68%)
+        62,507,421      instructions:u                   #      3.3 instructions  insn_per_cycle  ( +-  0.78% )  (93.65%)
+                        TopdownL1                        #      3.4 %  tma_backend_bound      
+                                                         #      8.4 %  tma_bad_speculation      ( +-  3.14% )  (73.18%)
+                                                         #     27.2 %  tma_frontend_bound       ( +-  2.76% )  (52.72%)
+                                                         #     61.0 %  tma_retiring             ( +-  0.47% )  (52.72%)
+
+       0.005519619 +- 0.000426197 seconds time elapsed  ( +-  7.72% )
+
+# started on Fri Jun  5 15:11:08 2026
+
+
+ Performance counter stats for '././alignment/pearson ./data/256.data ./data_o/256_seq.data' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+               588      page-faults:u                    #  33566.5 faults/sec  page_faults_per_second  ( +-  0.06% )
+             17.52 msec task-clock:u                     #      1.0 CPUs  CPUs_utilized         ( +-  0.74% )
+         1,673,010      L1-dcache-load-misses:u          #      2.6 %  l1d_miss_rate            ( +-  0.56% )  (65.39%)
+             7,951      LLC-loads:u                      #     12.5 %  llc_miss_rate            ( +-  1.51% )  (53.86%)
+           272,893      branch-misses:u                  #      0.7 %  branch_miss_rate         ( +-  0.76% )  (48.47%)
+        43,345,521      branches:u                       #   2474.4 M/sec  branch_frequency     ( +-  1.09% )  (54.23%)
+        72,054,505      cpu-cycles:u                     #      4.1 GHz  cycles_frequency       ( +-  0.15% )  (60.00%)
+       251,154,332      instructions:u                   #      3.4 instructions  insn_per_cycle  ( +-  0.36% )  (57.68%)
+                        TopdownL1                        #      6.8 %  tma_backend_bound      
+                                                         #      8.8 %  tma_bad_speculation      ( +-  0.40% )  (68.84%)
+                                                         #     21.2 %  tma_frontend_bound       ( +-  0.40% )  (63.07%)
+                                                         #     63.2 %  tma_retiring             ( +-  0.24% )  (68.85%)
+
+       0.017802904 +- 0.000132588 seconds time elapsed  ( +-  0.74% )
+
+# started on Fri Jun  5 15:11:08 2026
+
+
+ Performance counter stats for '././alignment/pearson ./data/512.data ./data_o/512_seq.data' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             1,681      page-faults:u                    #  22983.3 faults/sec  page_faults_per_second  ( +-  0.03% )
+             73.14 msec task-clock:u                     #      1.0 CPUs  CPUs_utilized         ( +-  0.09% )
+         9,686,024      L1-dcache-load-misses:u          #      3.4 %  l1d_miss_rate            ( +-  0.37% )  (71.31%)
+            72,765      LLC-loads:u                      #     12.6 %  llc_miss_rate            ( +-  1.88% )  (61.75%)
+           909,545      branch-misses:u                  #      0.5 %  branch_miss_rate         ( +-  0.25% )  (52.23%)
+       191,108,328      branches:u                       #   2612.9 M/sec  branch_frequency     ( +-  0.28% )  (53.60%)
+       317,649,826      cpu-cycles:u                     #      4.3 GHz  cycles_frequency       ( +-  0.08% )  (54.96%)
+     1,075,638,758      instructions:u                   #      3.4 instructions  insn_per_cycle  ( +-  0.32% )  (47.81%)
+                        TopdownL1                        #      8.2 %  tma_backend_bound      
+                                                         #     17.1 %  tma_bad_speculation      ( +-  0.24% )  (65.53%)
+                                                         #     15.3 %  tma_frontend_bound       ( +-  0.28% )  (64.16%)
+                                                         #     59.4 %  tma_retiring             ( +-  0.11% )  (72.36%)
+
+       0.073532349 +- 0.000081798 seconds time elapsed  ( +-  0.11% )
+
+# started on Fri Jun  5 15:11:09 2026
+
+
+ Performance counter stats for '././alignment/pearson ./data/1024.data ./data_o/1024_seq.data' (10 runs):
+
+                 0      context-switches:u               #      0.0 cs/sec  cs_per_second     
+                 0      cpu-migrations:u                 #      0.0 migrations/sec  migrations_per_second
+             5,637      page-faults:u                    #  15998.1 faults/sec  page_faults_per_second  ( +-  1.38% )
+            352.35 msec task-clock:u                     #      1.0 CPUs  CPUs_utilized         ( +-  0.08% )
+        68,943,490      L1-dcache-load-misses:u          #      4.9 %  l1d_miss_rate            ( +-  0.13% )  (72.71%)
+           499,936      LLC-loads:u                      #      3.8 %  llc_miss_rate            ( +-  2.27% )  (63.62%)
+         3,603,111      branch-misses:u                  #      0.4 %  branch_miss_rate         ( +-  0.24% )  (54.52%)
+       828,281,087      branches:u                       #   2350.7 M/sec  branch_frequency     ( +-  0.15% )  (54.52%)
+     1,527,448,394      cpu-cycles:u                     #      4.3 GHz  cycles_frequency       ( +-  0.08% )  (54.52%)
+     5,005,118,459      instructions:u                   #      3.3 instructions  insn_per_cycle  ( +-  0.10% )  (45.48%)
+                        TopdownL1                        #      3.7 %  tma_backend_bound      
+                                                         #     39.1 %  tma_bad_speculation      ( +-  0.20% )  (63.67%)
+                                                         #      7.5 %  tma_frontend_bound       ( +-  0.36% )  (63.67%)
+                                                         #     49.7 %  tma_retiring             ( +-  0.28% )  (72.76%)
+
+       0.352808761 +- 0.000287346 seconds time elapsed  ( +-  0.08% )
+
