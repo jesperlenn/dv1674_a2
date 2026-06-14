@@ -1,130 +1,109 @@
-#import "../import/graphs.typ": graph_all, graph_average_difference, graph_average_diff_between, graph_par_128, graph_par_256, graph_par_512, graph_par_1024
+#import "../data/pearson.typ": seq_speedup, multi_speedup, multi_speedup_opt, seq_time
+#import "../graphs/pearson.typ": speedup_graph, speedup_graph_multi, speedup_graph_multi_opt, mem_graph_multi
 
 = Pearson
 
-A simple bash script was written, `tests.sh`, with the purpose of making the testing and verification simpler. It has two modes: verify the output of the binary to previously established results and run the performance tests, which was used to extract the data. It ran all the tests on all the provided data files containing the various sizes of vectors, and later all threads. The parallel version of the binary is verified by the provided verification script, named `verify.sh`, making the verification part of `tests.sh` redundant and removed, only leaving the different performance tests.
+The optimization process followed a simple process: run tests, implement optimization, run tests and determin if they should be kept. Multithreading was implemented using `pthread` when the sequential version reached an optimal stage.
 
 == Sequential
 
-The initial step taken was to enable compiler optimizations with the flags `-O2` and `-O3` where the one with best time was kept, `-O3` proved to be 527ms quicker than `-O2` and brought the total time down with 71.8% from the original, shown in @table-1-step. All the other stages are using the `-O3` flag when compiling.
+The initial step taken was to enable compiler optimizations with the flags `-O2` and `-O3` where the one with best time was kept, `-O3` proved to be 527ms quicker than `-O2` which gave the results in @table-1-step. All the other stages are using the `-O3` flag when compiling.
 
 #figure(
-  caption: [Changes between the Base and the O3 step for size 1024.],
+  caption: [Speed ups after using compile time optimizations.],
   table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-16,170], [4,320],
-    [Cache Miss (%)], [7.41], [7.89],
-    [CPU (%)], [0.00], [100.00],
-    [Memory (MB)], [0.00], [22.12], 
-    [Instructions], [-197542221927], [31984950024],
+    columns: (1fr, 1fr),
+    [Sizes], [Speed Up],
+    ..for (size, opt, cache, loop, locality, io) in seq_speedup {
+      ([#size], [#opt])
+    }
   )
 )<table-1-step>
 
-Next was the implementation of a cache, keeping all the results from the `mean` and `magnitude` methods in the `Vector` class. This was achieved by creating two arrays `mean_cache` and `magnitude_cache` which were initialized with the maximum value a double can take. It would check the cache, if the value equals the maximum a value for mean and magnitude would be calculated and then stored at the provided index, otherwise the value would be collected and used. This subtle change pulled the time down with another 32.67% from the previous step, @table-2-step, and 74.4% from the original.
+Next was the implementation of a cache, keeping all the results from the `mean` and `magnitude` methods in the `Vector` class. This was achieved by creating two arrays `mean_cache` and `magnitude_cache` which were initialized with the maximum value a double can take. It would check the cache, if the value equals the maximum a value for mean and magnitude would be calculated and then stored at the provided index, otherwise the value would be collected and used. This gave a speed up between 3.4 and 8.2 depending on the vector size, @table-2-step.
 
 #figure(
-  caption: [Changes between O3 and the cache step for size 1024.],
+  caption: [Speed up after implementing a cache.],
   table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-1,833], [2,487],
-    [Cache Miss (%)], [3.52], [11.41],
-    [CPU (%)], [-0.10], [99.90],
-    [Memory (MB)], [0.02], [22.14], 
-    [Instructions], [-8746790499], [23238159525],
+    columns: (1fr, 1fr),
+    [Sizes], [Speed Up],
+    ..for (size, opt, cache, loop, locality, io) in seq_speedup {
+      ([#size], [#cache])
+    }
   )
 )<table-2-step>
 
-The third step took inspiration from locality, moving the calculations into the vector. `VTune` showed massive allocation amounts, for size 1024 the total reached 30.2 GB, where the biggest corporate is the constant copying and construction of new vectors when performing all the calculations. This step took the cache and _moved_ it into the vector, or with other words replaced it with the vector itself. By realizing the original vector wasn't needed, all the calculations were changed to be preformed directly on the original. This replaced the original values by the calculated ones storing them in the vector, saving them for the `dot` method. This step lowered the allocation amount down to 103.9 MB for 1024, meaning the requests for more memory to the OS fell giving a positive difference of 40.31% from the caching step, @table-3-step, and 88.64% difference from the original.
+We continued to loop unroling, allowing the loops in the vector to do four calculations per iteration and eliminating dependencies by doing said calculations to temporary variables and then calculating the final result from them minimizing the pipeline stalls. This simple change give the speed ups show in @table-4-step.
 
 #figure(
-  caption: [Changes between cache and the locality step for size 1024.],
+  caption: [Speed up after implementing loop unroling.],
   table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-1,478], [1,008],
-    [Cache Miss (%)], [-7.80], [3.61],
-    [CPU (%)], [-0.10], [99.80],
-    [Memory (MB)], [-0.02], [22.12], 
-    [Instructions], [-17290556276], [5947603249],
-  )
-)<table-3-step>
-
-We continued to loop unfolding, allowing the loops in the vector to do four calculations per iteration and eliminating dependencies by doing said calculations to temporary variables and then calculating the final result from them minimizing the pipeline stalls. This simple change lowered the time by 17.62% from the previous step and 90.2% from the original, leaving it at 704ms for size 1024, shown in @table-4-step.
-
-#figure(
-  caption: [Changes between locality and the loop unfolding step for size 1024.],
-  table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-304], [704],
-    [Cache Miss (%)], [0.00], [3.61],
-    [CPU (%)], [0.00], [99.80],
-    [Memory (MB)], [0.00], [22.12], 
-    [Instructions], [-806078158], [5141525091],
+    columns: (1fr, 1fr),
+    [Sizes], [Speed Up],
+    ..for (size, opt, cache, loop, locality, io) in seq_speedup {
+      ([#size], [#loop])
+    }
   )
 )<table-4-step>
 
-The fifth step focused on IO the functions taking the most time now were `dot`, `read`, and `write`. `write` is heavily IO bound due to reading and writing file content to the disk, `write` was optimized by removing `std::endl` from the stream and replacing it with `\n` this allowed the stream to continue without clearing the buffer every iteration through the results. This gave us another 45.16% off the previous, @table-5-step, and a total of 94.64% from the original, giving us 404ms for 1024.
+The third step took inspiration from locality, moving the calculations into the vector. `VTune` showed massive allocation amounts, for size 1024 the total reached 30.2 GB, where the biggest corporate is the constant copying and construction of new vectors when performing all the calculations. This step took the cache and _moved_ it into the vector, or with other words replaced it with the vector itself. By realizing the original vector wasn't needed, all the calculations were changed to be preformed directly on the original. This replaced the original values by the calculated ones storing them in the vector, saving them for the `dot` method. This step lowered the allocation amount down to 103.9 MB for 1024, meaning the requests for more memory to the OS fell giving a speed up of 3.43 for 128 and 21 for 1024, @table-3-step.
+
+#figure(
+  caption: [Speed up after implementing the locality optimizations.],
+  table(
+    columns: (1fr, 1fr),
+    [Sizes], [Speed Up],
+    ..for (size, opt, cache, loop, locality, io) in seq_speedup {
+      ([#size], [#locality])
+    }
+  )
+)<table-3-step>
+
+The fifth step focused on IO the functions taking the most time now were `dot`, `read`, and `write`. `write` is heavily IO bound due to reading and writing file content to the disk, `write` was optimized by removing `std::endl` from the stream and replacing it with `\n` this allowed the stream to continue without clearing the buffer every iteration through the results. This gave the final speed up of 9.98 for 128 and 57.048 for 1024, @table-5-step.
 
 #figure(
   caption: [Changes between loop unfolding and the IO step for size 1024.],
   table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-301], [404],
-    [Cache Miss (%)], [1.22], [4.83],
-    [CPU (%)], [-0.10], [99.70],
-    [Memory (MB)], [0.00], [22.12], 
-    [Instructions], [-73611048], [5067914043],
+    columns: (1fr, 1fr),
+    [Sizes], [Speed Up],
+    ..for (size, opt, cache, loop, locality, io) in seq_speedup {
+      ([#size], [#io])
+    }
   )
 )<table-5-step>
 
-The final step taken is vector alignment, by using `alignas(double)`. Aligning the vector class to the primary value in the data array, gave us a slight performance increase. This lowered the L1 cache misses by 0.21% and gave us a speed increase of 6.05% from the previous step, @table-6-step, and 94.93% from the original. Leaving us at the final time of 376ms for size 1024 compared to 20,490ms for the original with the same size.
+All the changes are illustrated in @graph-speed-up showing all speed ups through out the steps on different vector sizes and @table-final-seq show all recorded times.
 
+#place(
+  center + bottom,
+  scope: "parent",
+  float: true,
+  [
 #figure(
-  caption: [Changes between IO and the alignment step for size 1024.],
+  caption: [All run times in seconds.],
   table(
-    columns: (1.3fr, 1fr, 1fr),
-    rows: 6,
-    [], [Difference], [Actual],
-    [Time (ms)], [-0.0278], [376],
-    [Cache Miss (%)], [-0.06], [4.77],
-    [CPU (%)], [0.00], [99.70],
-    [Memory (MB)], [0.00], [22.12], 
-    [Instructions], [-7696245], [5060217798],
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+    [Sizes], [Base], [Flags], [Cache], [Loop], [Locality], [IO],
+    ..for (size, base, opt, cache, loop, locality, io) in seq_time {
+      ([#size], [#base], [#opt], [#cache], [#loop], [#locality], [#io])
+    }
   )
-)<table-6-step>
+)<table-final-seq>
+])
 
-All the changes are illustrated in @graph-time-all showing all the time differences through out the steps on different vector sizes. Due to the size 1024 over shadowing the other values, @graph-difference might be better to look at. The second graph shows the removed time in percent compared to the original while @graph-diff-between shows the removed time in percent from the previous step, or with other words, the impact.
-
-#figure(
-  caption: [Illustration of the total removed time in percent from the base.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_average_difference
-)<graph-difference>
-
-#figure(
-  caption: [Illustration of the total removed time in percent from the previous step.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_average_diff_between
-)<graph-diff-between>
-
+#place(
+  center + top,
+  scope: "parent",
+  float: true,
+  [
 #figure(
   caption: [Illustration of all the different sizes through all the taken steps.],
   kind: "graph",
   supplement: [Graph],
-  graph_all
-)<graph-time-all>
-
+  speedup_graph
+)<graph-speed-up>
+]
+)
 
 == Parallelism
 
@@ -142,45 +121,83 @@ This is we needed to execute the `dot` method evenly across all the threads. But
 
 In conclusion, the program first separates the dataset between the threads, then it starts the threads which run the `prepeare` method on each vector. The main thread continues to add the vectors to pairs giving them their index for the result and then stops at a `pthread_barrier`, when all the other threads are done processing they'll reach the same barrier, which will let them proceed when all threads reach it. The threads continue to process the `dot` method and places the result in the result vector at the given index, they'll join the main thread when the processing is done.
 
-The same tests were run at the same sizes for each thread count, 1 to 32, giving the results shown through @graph-par-128 to @graph-par-1024.
+The same tests were run at the same sizes for each thread count, 1 to 32, giving the results shown through @table-multi-base and @table-multi-optimized.
 
-- Size 128 didn't showed any improvement through out the threads, with a best time of 5.3ms using two, four, and eight threads. This isn't better than the sequential version, meaning a this size threads aren't worth it.
+#place(
+  top + center,
+  scope: "parent",
+  float: true,
+    [
+      #figure(
+        caption: [Total speed up per thread count compared to base sequential version.],
+        kind: "figure",
+        supplement: [Figure],
+        [
+          #speedup_graph_multi
+          #table(
+            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+            [Sizes], [1], [2], [4], [8], [16], [32],
+            ..for (size, one, two, four, eight, sixteen, thirtytwo) in multi_speedup {
+              ([#size], [#one], [#two], [#four], [#eight], [#sixteen], [#thirtytwo])
+            }
+          )
+        ]
+      )<table-multi-base>
+    ]
+  )
 
-#figure(
-  caption: [Illustration of time over different thread counts for size 128.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_par_128
-)<graph-par-128>
+  #place(
+    top + center,
+    scope: "parent",
+    float: true,
+    [
+      #figure(
+        kind: "figure",
+        supplement: [Figure],
+        caption: [Total speed up per thread count compared to optimized sequential version subtracted by one to highlight the difference.],
+        [
+          #speedup_graph_multi_opt
+          #table(
+            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+            [Sizes], [1], [2], [4], [8], [16], [32],
+            ..for (size, one, two, four, eight, sixteen, thirtytwo) in multi_speedup_opt {
+              ([#size], [#one], [#two], [#four], [#eight], [#sixteen], [#thirtytwo])
+            }
+          )
+        ]
+      )<table-multi-optimized>
+    ]
+  )
 
-- Size 256 showed slight improvement, with the greatest different from the sequential version at four threads at 17.7ms, which is a reduction of 1.1ms
+- Size 128 didn't showed any improvement through out the threads, hovering between 0.8 and 0.9 speed up. This isn't better than the sequential version, meaning a this size threads aren't worth it.
 
-#figure(
-  caption: [Illustration of time over different thread counts for size 256.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_par_256
-)<graph-par-256>
+- Size 256 showed slight improvement, bearly reaching a speed up at two and four threads.
 
-- Size 512 shows a slightly better situation than the other two, with a best time of 68.2ms at eight threads, which is a reduction of 9.1ms.
+- Size 512 shows a slightly better situation than the other two, with a result of 1.129x speed up.
 
-#figure(
-  caption: [Illustration of time over different thread counts for size 512.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_par_512
-)<graph-par-512>
+- Size 1024 gave the best improvement, with the greatest speed up of 1.399x with eight threads. This also giva the biggest speed up compared to the base version with a value of 79.8 times.
 
-- Size 1024 gave the best improvement, with a best time of 267ms at eight threads, which is a reduction of 109ms.
+All the vector sizes show a negative impact when only running one thread, @table-multi-optimized, which is explained by the extra processing needed to prepare the data for multithreading.
 
-#figure(
-  caption: [Illustration of time over different thread counts for size 1024.],
-  kind: "graph",
-  supplement: [Graph],
-  graph_par_1024
-)<graph-par-1024>
+== Performance and Scalability
 
-Though there simply aren't enough data to fully utilize the whole CPU, the greatest utilization reached was 162.1% with 16 threads and size 1024, which didn't give the best results either way.
+The speed up grow with the thread count if the vector size is big enough, @table-multi-optimized. This allow the CPU utilization to grow with the data with greater speed  ups than shown here. The memory utilization grow with the vector size, @table-multi-mem, but not the thread count. This allow us to use as many threads as we want with minimal memory waste, only limited by the growing vector.
+
+#place(
+  top + center,
+  scope: "parent",
+  float: true,
+  [
+    #figure(
+      kind: "figure",
+      supplement: [Figure],
+      caption: [Maximum memory consumption during run time per thread count.],
+      [
+        #mem_graph_multi
+      ]
+    )<table-multi-mem>
+  ]
+)
 
 == What more?
 

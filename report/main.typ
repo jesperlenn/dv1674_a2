@@ -1,5 +1,4 @@
-#import "./import/title.typ": title_page
-#import "./import/report.typ": report
+#import "./import/report.typ": report, title_page
 
 #show: report
 
@@ -13,18 +12,18 @@
   )
 )
 
-#show outline: (it) => {
-  set page(columns: 1)
-  it
-}
-
-#outline()
+#place(
+  top + center,
+  scope: "parent",
+  float: true,
+  [
+    #outline()
+  ]
+)
 
 #counter(page).update(1)
-#set page(numbering: "1")
 
 #include "pages/introduction.typ"
 #include "pages/method.typ"
 #include "pages/pearson.typ"
 #include "pages/blur.typ"
-#include "pages/discussion.typ"

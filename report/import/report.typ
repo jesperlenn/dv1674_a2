@@ -20,20 +20,51 @@
   set text(size: 11pt)
   set heading(numbering: "I.")
 
+  show outline: it => {
+    place(
+      center + top,
+      float: true,
+      scope: "parent",
+      clearance: 2em,
+      it
+    )
+  }
+
   show heading.where(level: 1): it => {
-    smallcaps(text(16pt, weight: "regular")[#it])
+    set par(justify: false)
+    smallcaps(text(14pt, weight: "regular")[#it])
     set block(above: 0em);
     line(length: 100%)
   }
 
   show heading.where(level: 2): it => {
+    set par(justify: false)
     smallcaps(text(14pt, weight: "regular")[#it])
   }
 
-  show figure.where(kind: table): it => {
-    set figure.caption(position: top)
-    set block(above: 1em, below: 1em)
+  show figure: it => {
+    if it.kind == table {
+      set figure.caption(position: top)
+      block(
+        above: 2em,
+        below: 2em,
+        it
+      )
+    } else {
+      block(
+        above: 2em,
+        below: 2em,
+        [
+          #it.body
+          #line(length: 100%)
+          #it.caption
+        ]  
+      )
+    }
+  }
 
+  show raw.where(block: true): it => {
+    set block( width: 100%, above: 1em, below: 2em)
     it
   }
 
@@ -90,14 +121,42 @@
     scope: "parent",
     clearance: 2em
   )[
+    #set par(justify: false)
     #set block(above: 1em, below: 1em)
-    #align(center, text(17pt, weight: "bold")[
-      #title
+    #align(center, text(24pt, weight: "regular", )[
+      #upper(title)
     ])
     #line(length: 100%)
-    
-    #line(length: 100%)
-    #align(center, text(12pt)[#subtitle])
+    #align(center, text(14pt)[#subtitle])
   ]
+}
+
+#let title_page(title: [], subtitle:[], authors: []) = {
+  set page(columns: 1)
+  set block(above: 1em, below: 1em)
+  set par(justify: false)
+
+  rect(
+    width: 100%,
+    height: 100%,
+    stroke: none,
+    align(
+      center + horizon, 
+      grid(
+        rows: (1fr, 1fr, 1fr),
+        [
+          #align(center, text(26pt, weight: "regular")[#upper(title)])
+          #line(length: 100%)
+          #align(center, text(14pt)[#upper(subtitle)])
+      ],
+        [
+        #image("bth-logga.jpg", scaling: "smooth")
+      ],
+        [
+        #align(center, text(14pt)[#authors])
+      ],
+      )
+    )
+  )
 }
 
