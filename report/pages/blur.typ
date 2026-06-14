@@ -143,3 +143,20 @@ Several factors contribute to this behavior:
 + According to Amdahl's Law, the serial portion of the program limits maximum achievable speedup.
 
 As a result, additional threads beyond eight provide little additional performance.
+
+== Additional Optimization Opportunities
+
+=== SIMD Vectorization
+Modern CPUs support Single Instruction Multiple Data (SIMD) instruction, which allow multiple pixel values to be processed simultaneously.
+Since the Gaussian blur performs the same arithmetic operations on large arrays of pixel data it is well suited for vectorization. Using SIMD intrinsics or compiler-assisted vectorization could further reduce execution time by increasing the amount of work performed per CPU cycle.
+
+=== Loop Unrolling
+The convolution loops could be manually unrolled to reduce loop-control overhead and increase instruction-level parallelism.
+Unrolling decreases the number of branch instructions executed and may allow the compiler to generate more efficient code.
+Although modern compilers perform some automatic loop unrolling, additional performance gains may be possible through manual tuning of the most frequently executed loops.
+
+=== GPU Acceleration
+Gaussian blur is a highly parallel image-processing operation and is therefore well suited for execution on graphics processing units (GPUs).
+A GPU implementation using CUDA or OpenCL could process thousands of pixels concurrently, providing substantially higher throughput than a CPU-based implementation.
+This approach would be particularly beneficial for large images where the overhead of transferring data to and from the GPU is outweighed by the increased computational performance.
+These optimizations were not explored in this project, but they represent promising directions for future work and could potentially provide additional performance improvements beyond those achieved with the current CPU implementation.
