@@ -11,9 +11,9 @@ build_seq:
 
 build_par:
 	$(MAKE) -C ./multithread
-	cp ./multithread/pearson ./pearson_par
+	cp ./multithread/pearson_par ./pearson_par
 
-test_all: build_seq build_par
+test: build_seq build_par
 	./scripts/test_seq.sh
 	./scripts/test_par.sh
 

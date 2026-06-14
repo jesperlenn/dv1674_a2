@@ -34,11 +34,11 @@ do
     echo "done."
   done
 
-  for f in "${FILES[@]}"; do
-    echo -n "running perf stat ${f} ... "
-    perf stat -o ${RDIR}/${ver}/perf.data --append -d --repeat 10 ./${BIN} 15 ${DDIR}/${f}.ppm ${ODIR}/${f}_seq.ppm
-    echo "done."
-  done
+  # for f in "${FILES[@]}"; do
+  #   echo -n "running perf stat ${f} ... "
+  #   perf stat -o ${RDIR}/${ver}/perf.data --append -d --repeat 10 ./${BIN} 15 ${DDIR}/${f}.ppm ${ODIR}/${f}_seq.ppm
+  #   echo "done."
+  # done
 
   # rm -f ${RDIR}/${ver}/callgrind/*
   # for f in "${FILES[@]}"; do
@@ -47,12 +47,12 @@ do
   #   echo "done."
   # done
 
-  rm -f ${RDIR}/${1}/massif/*
-  for f in "${FILES[@]}"; do
-    echo -n "Running massif ${f} ... "
-    valgrind -q --tool=massif --massif-out-file=${RDIR}/${ver}/massif/massif.out.%p ./${BIN} 15 ${DDIR}/${f}.ppm ${ODIR}/${f}_seq.ppm 2> /dev/null
-    echo "done."
-  done
+  # rm -f ${RDIR}/${1}/massif/*
+  # for f in "${FILES[@]}"; do
+  #   echo -n "Running massif ${f} ... "
+  #   valgrind -q --tool=massif --massif-out-file=${RDIR}/${ver}/massif/massif.out.%p ./${BIN} 15 ${DDIR}/${f}.ppm ${ODIR}/${f}_seq.ppm 2> /dev/null
+  #   echo "done."
+  # done
 
   echo "Finished testing ${ver}"
 done

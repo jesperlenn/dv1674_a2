@@ -26,11 +26,11 @@ for t in "${THREADS[@]}"; do
     echo "done."
   done
 
-  for f in "${FILES[@]}"; do
-    echo -n "running perf stat with ${t} threads ${f} ... "
-    perf stat -o ${RDIR}/${1}/${t}/perf.data --append -d --repeat 10 ./${BIN} 15 "./data/${f}.ppm" "./data_o/blur_${f}_blurred.ppm" ${t}
-    echo "done."
-  done
+  # for f in "${FILES[@]}"; do
+  #   echo -n "running perf stat with ${t} threads ${f} ... "
+  #   perf stat -o ${RDIR}/${1}/${t}/perf.data --append -d --repeat 10 ./${BIN} 15 "./data/${f}.ppm" "./data_o/blur_${f}_blurred.ppm" ${t}
+  #   echo "done."
+  # done
 
   # rm -f ${RDIR}/${1}/${t}/callgrind/*
   # for f in "${FILES[@]}"; do
@@ -39,12 +39,12 @@ for t in "${THREADS[@]}"; do
   #   echo "done."
   # done
 
-  rm -f ${RDIR}/${1}/${t}/massif/*
-  for f in "${FILES[@]}"; do
-    echo -n "Running massif with ${t} threads ${f} ... "
-    valgrind -q --tool=massif --massif-out-file=${RDIR}/${1}/${t}/massif/massif.out.%p ./${BIN} 15 "./data/${f}.ppm" "./data_o/blur_${f}_blurred.ppm" ${t}
-    echo "done."
-  done
+  # rm -f ${RDIR}/${1}/${t}/massif/*
+  # for f in "${FILES[@]}"; do
+  #   echo -n "Running massif with ${t} threads ${f} ... "
+  #   valgrind -q --tool=massif --massif-out-file=${RDIR}/${1}/${t}/massif/massif.out.%p ./${BIN} 15 "./data/${f}.ppm" "./data_o/blur_${f}_blurred.ppm" ${t}
+  #   echo "done."
+  # done
 done
 
 notify-send "Tests done."

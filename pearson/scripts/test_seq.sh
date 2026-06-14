@@ -27,26 +27,26 @@ do
     echo "done."
   done
 
-  for f in "${FILES[@]}"; do
-    echo -n "running perf stat ${f} ... "
-    perf stat -o ${RDIR}/${ver}/perf.data --append -d --repeat 10 ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-    echo "done."
-  done
-
-  rm -f ${RDIR}/${ver}/callgrind/*
-  for f in "${FILES[@]}"; do
-    echo -n "Running callgrind ${f} ... "
-    valgrind -q --tool=callgrind --cache-sim=yes --branch-sim=yes --dump-instr=yes --callgrind-out-file=${RDIR}/${ver}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-    echo "done."
-  done
-
-  rm -f ${RDIR}/${1}/massif/*
-  for f in "${FILES[@]}"; do
-    echo -n "Running massif ${f} ... "
-    valgrind -q --tool=massif --massif-out-file=${RDIR}/${ver}/massif/massif.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
-    echo "done."
-  done
-
+  # for f in "${FILES[@]}"; do
+  #   echo -n "running perf stat ${f} ... "
+  #   perf stat -o ${RDIR}/${ver}/perf.data --append -d --repeat 10 ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
+  #   echo "done."
+  # done
+  #
+  # rm -f ${RDIR}/${ver}/callgrind/*
+  # for f in "${FILES[@]}"; do
+  #   echo -n "Running callgrind ${f} ... "
+  #   valgrind -q --tool=callgrind --cache-sim=yes --branch-sim=yes --dump-instr=yes --callgrind-out-file=${RDIR}/${ver}/callgrind/callgrind.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
+  #   echo "done."
+  # done
+  #
+  # rm -f ${RDIR}/${1}/massif/*
+  # for f in "${FILES[@]}"; do
+  #   echo -n "Running massif ${f} ... "
+  #   valgrind -q --tool=massif --massif-out-file=${RDIR}/${ver}/massif/massif.out.%p ./${BIN} ${DDIR}/${f}.data ${ODIR}/${f}_seq.data
+  #   echo "done."
+  # done
+  #
   echo "Finished testing ${ver}"
 done
 
