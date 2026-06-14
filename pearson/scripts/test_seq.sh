@@ -3,8 +3,7 @@
 set -e
 
 FILES=(128 256 512 1024)
-# VERSIONS=(base optimizers cache io locality loops alignment)
-VERSIONS=(loops)
+VERSIONS=(base optimizers cache io locality loops)
 DDIR=./data
 ODIR=./data_o
 RDIR=./result

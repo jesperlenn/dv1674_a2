@@ -18,4 +18,4 @@ ppm: ppm.hpp ppm.cpp
 	$(CXX) $(CXXFLAGS) -c ppm.cpp -o ppm.o
 
 clean:
-	rm -rf blur *.ppm *.o *.dSYM 2> /dev/null
+	rm -rf blur blur_par *.ppm *.o *.dSYM 2> /dev/null

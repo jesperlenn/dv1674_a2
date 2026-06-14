@@ -1,3 +1,5 @@
+all: build_seq build_par
+
 build_seq:
 	$(MAKE) -C ./base
 	$(MAKE) -C ./optimizers
@@ -5,10 +7,11 @@ build_seq:
 	$(MAKE) -C ./io
 	$(MAKE) -C ./cache
 	$(MAKE) -C ./loops
-	$(MAKE) -C ./alignment
+	cp ./io/pearson .
 
 build_par:
 	$(MAKE) -C ./multithread
+	cp ./multithread/pearson ./pearson_par
 
 test_all: build_seq build_par
 	./scripts/test_seq.sh
@@ -19,3 +22,14 @@ test_seq: build_seq
 
 test_par: build_par
 	./scripts/test_par.sh
+
+clean:
+	$(MAKE) clean -C ./base
+	$(MAKE) clean -C ./optimizers
+	$(MAKE) clean -C ./locality
+	$(MAKE) clean -C ./io
+	$(MAKE) clean -C ./cache
+	$(MAKE) clean -C ./loops
+	$(MAKE) clean -C ./multithread
+	@rm -f pearson
+	@rm -f pearson_par
